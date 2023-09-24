@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+
+            background-color: #efefef;
+        }
+
+        main {
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 10rem;
+
+        }
+
+        .caption {
+            margin-top: 0;
+        }
+
+        .page-title {
+            margin-bottom: 8px;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .logo {
+                transform: scale(1);
+                animation: pulse 2s infinite;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+    <title>Achura | Empowering NGO's</title>
+</head>
+
+<body>
+    <main>
+        <div class="logo">
+            🦙
+        </div>
+        <h1 class="page-title">Achura.co</h1>
+        <h3 class="caption">Empowering NGO's</h3>
+        <span>Made with 💖 by <a href="https://cypherplatxs.github.io/" target="_blank"
+                rel="noopener noreferrer">cypherplatxs</a></span>
+    </main>
+</body>
+
+</html>
