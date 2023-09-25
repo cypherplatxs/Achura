@@ -15,6 +15,17 @@
 
 <p> Achura utiliza <a href="https://www.kravata.co/">Kratava</a> para cambiar los actvos locales en criptomonedas y viceversa</p>
 
+<details>
+<summary> <h1><b> Preguntas frecuentes</b> </h1></summary>
+
+<h1>Cómo usar Achura</h1>
+<h1>KYC </h1>
+
+
+</details>
+
+<h1>Documentación</h1>
+
 <h2 align="center"> <img src="https://64.media.tumblr.com/21ec7fd483694997f0ebb7613eb7997a/12956cb4d7d9149f-8b/s500x750/2767da49935505d03aa4f4bed732dfa5e85f9a28.gif" width="200" /> <a href="#"> </a></h2>
 
 
