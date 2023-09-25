@@ -1,11 +1,17 @@
+
+
 <img align='right' src='https://user-images.githubusercontent.com/5713670/87202985-820dcb80-c2b6-11ea-9f56-7ec461c497c3.gif' width='200'>
 
-# Achura
 
-## Empowering NGO's
+<h1 align="center">Achura</h1>
+
+<h2 align="center">Empowering NGO's </h2>
 
 
-### Team 
+
+
+<h2 align="center"> <img src="https://emojis.slackmojis.com/emojis/images/1621024394/39092/cat-roll.gif?1621024394" width="28" /> <a href="#"> Team</a></h2>
+
 
 [@Luis](https://github.com/Another-DevX) | [@Sandusky](https://github.com/cold-briu) | [@Noisk8](https://github.com/noisk8) | [@Juminstock](https://github.com/juminstock)
 --- | --- | --- | ---
