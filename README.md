@@ -22,6 +22,6 @@
  ![JOUSELUIS2](https://github.com/cypherplatxs/Achura/assets/17709296/c5cd40ab-8aea-4915-8c71-e61aeb3702dc)| ![SANDUSKY](https://github.com/cypherplatxs/Achura/assets/17709296/315484e9-d6ef-4621-8c15-f04605a83622) | ![NOIISK8](https://github.com/cypherplatxs/Achura/assets/17709296/7f9b6626-b00d-42d3-9afc-56dd996cb487)| ![KALICHE](https://github.com/cypherplatxs/Achura/assets/17709296/b7912411-9e72-41d5-abdd-8a3b00f05f40)
 
 
-[@Juminstock](https://github.com/m0nica) | [@Prophen](https://github.com/Prophen) | [@kjaymiller](https://github.com/kjaymiller) | [tom](#https://wittenbrock.github.io/toms-myspace-page/)
---- | --- | --- | ---
-![@m0nica](https://avatars.githubusercontent.com/m0nica?s=150&v=1) | ![@Prophen](https://avatars.githubusercontent.com/Prophen?s=150&v=1) | ![@kjaymiller](https://avatars.githubusercontent.com/kjaymiller?s=150&v=1) | ![tom](https://wittenbrock.github.io/toms-myspace-page/pictures/tom-pic.jpg)
+[@Platoboss](https://github.com/m0nica) | 
+--- | 
+![DONAL](https://github.com/cypherplatxs/Achura/assets/17709296/88de85c2-2f9e-4367-876e-027096afa264)| 
