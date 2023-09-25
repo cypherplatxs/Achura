@@ -8,9 +8,14 @@
 <h2 align="center">Empowering NGO's </h2>
 
 
+<p>Achura es un proyecto para potenciar la adoción de criptomonedas y el uso de blockchains por parte de ONGS, Achura que sirve para que las ONG puedan utilizar criptomonedass y recibirlas los activos en divisas que puedan convetir as sus divisas locales</p>
 
+<p>Achura espera resolver los problemas de las ong que resiven dinero desde  cooperación internaconal y constantemente pierden dinero en los cambios de divias y en los costos de transacción de los bancos 
+</p>
 
-<h2 align="center"> <img src="https://emojis.slackmojis.com/emojis/images/1621024394/39092/cat-roll.gif?1621024394" width="28" /> <a href="#"> Team</a></h2>
+<p> Achura utiliza <a href="https://www.kravata.co/">Kratava</a> para cambiar los actvos locales en criptomonedas y viceversa</p>
+
+<h2 align="center"> <img src="https://64.media.tumblr.com/21ec7fd483694997f0ebb7613eb7997a/12956cb4d7d9149f-8b/s500x750/2767da49935505d03aa4f4bed732dfa5e85f9a28.gif" width="200" /> <a href="#"> </a></h2>
 
 
 [@Luis](https://github.com/Another-DevX) | [@Sandusky](https://github.com/cold-briu) | [@Noisk8](https://github.com/noisk8) | [@Juminstock](https://github.com/juminstock)
