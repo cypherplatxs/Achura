@@ -1,1 +1,1 @@
-export * from './user/founder.types'
+export * from './user.types'
