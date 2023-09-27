@@ -4,7 +4,7 @@ import axios from 'axios';
 const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   //TODO: implementar lógica de submit
-  // axios.post('/api/user' ...)
+  // axios.post('/api/create-user' ...)
 };
 
 function Page() {
