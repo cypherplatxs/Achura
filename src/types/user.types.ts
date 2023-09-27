@@ -3,14 +3,14 @@ export type Founder = {
   userType: 'founder'
   walletName: string
   address: `0x${string}`
-  accountName: string
+  accountName: `${string}.near`
 }
 export type Organization = {
   //TODO: Add template literals to walletName
   walletName: string
   userType: 'organization'
   address: `0x${string}`
-  accountName: string
+  accountName: `${string}.near`
   taxRegistrationNumber: number
   country: string
   legalRepresentative: string
