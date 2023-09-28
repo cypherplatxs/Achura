@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react'
+import Nav from '@/components/landing/NavBar';
+import Footer from '@/components/landing/Footer';
 
 
 const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -15,6 +17,7 @@ export default function Example() {
 
   return (
     <>
+    <Nav />
       <div className="isolate bg-blackpx-6 py-24 sm:py-32 lg:px-8">
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -178,6 +181,7 @@ export default function Example() {
         </div>
       </form>
     </div>
+    <Footer />
     </>
   )
 }

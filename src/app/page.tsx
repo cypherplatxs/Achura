@@ -3,7 +3,7 @@ import Hero from '../components/landing/Hero'
 import CustomCard from '../components/landing/Card'
 import Faq from '@/components/landing/Faq'
 import Nav from '@/components/landing/NavBar'
-
+import Footer from '@/components/landing/Footer'
 
 export default function Home() {
   return (
@@ -40,7 +40,7 @@ export default function Home() {
 
 <Faq />
 
- 
+<Footer />
     </main>
   )
 }

@@ -11,6 +11,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import Nav from '@/components/landing/NavBar';
+import Footer from '@/components/landing/Footer';
 
 enum fetchState {
   loading = 'LOADING',
@@ -101,6 +102,8 @@ function Page() {
           <OrgListPanel orgs={data?.orgs as Organization[]} />
         </div>
       )}
+
+<Footer />
     </main>
   );
 }

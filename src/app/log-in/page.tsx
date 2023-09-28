@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image'
+import Nav from '@/components/landing/NavBar';
+import Footer from '@/components/landing/Footer';
 
 const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
@@ -10,15 +12,8 @@ const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 export default function Example() {
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+     <Nav />
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 pt-40">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
          
              <a href='#'><p className='text-9xl animate-bounce justify-center items-center text-center'>🦙</p></a>
@@ -47,7 +42,13 @@ export default function Example() {
             </a>
           </p>
         </div>
+
+        <div className='pt-40'>
+        <Footer />
+
+        </div>
       </div>
+      
     </>
   )
 }
