@@ -23,6 +23,26 @@ const histories: Histories = {
       amount: 1000,
       date: '2021-09-01'
     }
+  ],
+  '0x2345': [
+    {
+      hash: '0x1234',
+      to: '0x1234',
+      amount: 1000,
+      date: '2021-09-01'
+    },
+    {
+      hash: '0x1234',
+      to: '0x1234',
+      amount: 1000,
+      date: '2021-09-01'
+    },
+    {
+      hash: '0x1234',
+      to: '0x1234',
+      amount: 1000,
+      date: '2021-09-01'
+    }
   ]
 }
 
