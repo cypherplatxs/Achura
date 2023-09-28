@@ -10,7 +10,7 @@
 
 <p>Achura es un proyecto para potenciar la adoción de criptomonedas y el uso de blockchains por parte de ONGS, Achura que sirve para que las ONG puedan utilizar criptomonedass y recibirlas los activos en divisas que puedan convetir as sus divisas locales</p>
 
-<p>Achura espera resolver los problemas de las ong que resiven dinero desde  cooperación internaconal y constantemente pierden dinero en los cambios de divias y en los costos de transacción de los bancos 
+<p>Achura espera resolver los problemas de las ong que resiven dinero desde  cooperación internaconal y constantemente pierden dinero en los cambios de divisas y en los costos de transacción de los bancos 
 </p>
 
 <p> Achura utiliza <a href="https://www.kravata.co/">Kratava</a> para cambiar los actvos locales en criptomonedas y viceversa</p>
