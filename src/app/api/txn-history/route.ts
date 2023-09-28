@@ -37,6 +37,9 @@ export async function GET (req: NextRequest) {
     if (!address) {
       throw new Error('No address at headers')
     }
+    if (!histories.hasOwnProperty(address as Address)) {
+      throw new Error('Address not found in histories');
+    }
     return NextResponse.json(
       histories[address as Address]  ,
       { status: 200 }
