@@ -31,6 +31,8 @@ export default function Example () {
 
       <div className='min-h-[90vh] flex justify-center items-center flex-col w-full'>
         <form className='w-1/2 flex flex-col gap-5'>
+
+          <p className='text-center text-8xl animate-pulse'> 🦙</p>
           <h2 className='text-center font-bold text-4xl'>Join to Achura</h2>
           <Select
             onSelectionChange={(e: any) => setRole(e.currentKey)}
