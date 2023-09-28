@@ -6,7 +6,7 @@ import TxnPanel from '@/components/dashboard/TxnPanel'
 import WithdrawPanel from '@/components/dashboard/WithdrawPanel'
 import WalletContext from '@/context/walletContext'
 import { Organization, Txn, UserType } from '@/types/index.types'
-import { Divider, User } from '@nextui-org/react'
+import { Divider, Skeleton, User } from '@nextui-org/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
@@ -88,6 +88,15 @@ function Page () {
 
       {state === fetchState.loading && (
         <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
+          <div className='max-w-[300px] w-full flex items-center gap-3'>
+            <div>
+              <Skeleton className='flex rounded-full w-12 h-12' />
+            </div>
+            <div className='w-full flex flex-col gap-2'>
+              <Skeleton className='h-3 w-3/5 rounded-lg' />
+              <Skeleton className='h-3 w-4/5 rounded-lg' />
+            </div>
+          </div>
           <BalancePanelSkeleton />
           <WithdrawPanelSkeleton />
           <TxnPanelSkeleton />
