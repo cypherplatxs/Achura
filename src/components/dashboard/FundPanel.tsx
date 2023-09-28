@@ -26,7 +26,7 @@ function FundPanel() {
 
   return (
     <>
-      <Modal backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
               <ModalHeader className='text-black flex flex-col gap-1'>
                 Fund panel

@@ -11,7 +11,7 @@ function Providers({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <WalletContext.Provider value='0x1234'>
+    <WalletContext.Provider value='0x2345'>
       <NextUIProvider>{isMounted && children}</NextUIProvider>
     </WalletContext.Provider>
   );

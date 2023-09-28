@@ -5,7 +5,8 @@ import { NextResponse, NextRequest } from 'next/server'
 
 
 const balances: Balances = {
-  '0x1234': '1000'
+  '0x1234': '1000',
+  '0x2345': '1000'
 }
 
 export async function GET (req: NextRequest) {
