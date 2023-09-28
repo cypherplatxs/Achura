@@ -14,5 +14,7 @@ export type OrganizationUser = {
   taxRegistrationNumber: number
   country: string
   legalRepresentative: string
+  orgName: string
+  orgDescription: string
 }
 

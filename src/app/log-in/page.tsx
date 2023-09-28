@@ -13,7 +13,6 @@ const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 export default function Example() {
   return (
     <>
-     <Nav />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 pt-40">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
          
@@ -42,11 +41,6 @@ export default function Example() {
              Near Wallet de Near?
             </a>
           </p>
-        </div>
-
-        <div className='pt-40'>
-        <Footer />
-
         </div>
       </div>
       

@@ -82,10 +82,6 @@ function Page () {
   }, [address])
   return (
     <main className='min-h-screen'>
-      <div className='pb-20'>
-        <Nav />
-      </div>
-
       {state === fetchState.loading && (
         <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
           <div className='max-w-[300px] w-full flex items-center gap-3'>
@@ -120,8 +116,6 @@ function Page () {
           <OrgListPanel orgs={data?.orgs as Organization[]} />
         </div>
       )}
-
-      <Footer />
     </main>
   )
 }

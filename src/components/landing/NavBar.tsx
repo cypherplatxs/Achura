@@ -50,10 +50,10 @@ export default function Nav () {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="/log-in">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="/sign-up" variant="flat">
             Sign up
           </Button>
         </NavbarItem>
