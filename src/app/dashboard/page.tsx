@@ -67,6 +67,9 @@ function Page() {
   return (
     <main className='min-h-screen'>
       {address}
+      {state === fetchState.success && <p>{data?.userRole}</p>}
+      {state === fetchState.loading && <p>Loading...</p>}
+      {state === fetchState.error && <p>Something went wrong</p>}
       {state === fetchState.success && (
         <div className='w-full flex flex-col gap-10 py-20'>
           <BalancePanel balance={data?.balance as number} />
