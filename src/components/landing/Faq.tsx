@@ -6,7 +6,7 @@ export default function Faq() {
   return (
     <div className="w-full px-4 pt-16">
         <h1 className='text-center pb-10 text-4xl font-bold'> FAQ</h1>
-      <div className="mx-auto w-full max-w-3xl rounded-2xl bg-black p-2 pb-40">
+      <div className="mx-auto w-full max-w-3xl rounded-2xl p-2 pb-40">
         <Disclosure>
           {({ open }) => (
             <>
