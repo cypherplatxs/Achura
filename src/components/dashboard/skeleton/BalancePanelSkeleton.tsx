@@ -1,11 +1,7 @@
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Chip,
-  Divider,
-  Skeleton
-} from '@nextui-org/react'
+import {Card, CardBody, CardHeader} from '@nextui-org/card'
+import {Chip} from '@nextui-org/chip'
+import {Divider} from '@nextui-org/divider'
+import {Skeleton} from '@nextui-org/skeleton'
 import React from 'react'
 
 function BalancePanelSkeleton () {

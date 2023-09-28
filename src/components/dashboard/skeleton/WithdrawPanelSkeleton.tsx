@@ -1,12 +1,9 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Skeleton
-} from '@nextui-org/react'
+
 import React from 'react'
+import { Card ,CardBody, CardHeader } from '@nextui-org/card'
+import { Divider } from '@nextui-org/divider'
+import { Skeleton } from '@nextui-org/skeleton'
+import { Button } from '@nextui-org/button'
 
 function WithdrawPanelSkeleton () {
   return (

@@ -1,11 +1,7 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Skeleton
-} from '@nextui-org/react'
+import {Card, CardBody, CardHeader} from '@nextui-org/card'
+import {Button} from '@nextui-org/button'
+import {Divider} from '@nextui-org/divider'
+import {Skeleton} from '@nextui-org/skeleton'
 import React from 'react'
 
 function OrgListPanelSkeleton () {
