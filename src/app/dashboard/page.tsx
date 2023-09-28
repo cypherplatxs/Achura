@@ -26,6 +26,7 @@ function Page() {
 
   useEffect(() => {
     async function getAllData() {
+      //TODO: add parallel fetch
       try {
         const balanceResponse = await axios.get('/api/get-balance', {
           headers: {
@@ -60,10 +61,10 @@ function Page() {
     <main className='min-h-screen'>
       {address}
       {state === fetchState.success && (
-      <>
+      <div className='w-full flex flex-col gap-10 py-20'>
       <BalancePanel balance={data?.balance as number} />
       <TxnPanel txns={data?.txnHistory} />
-      </>
+      </div>
       )}
     </main>
   );

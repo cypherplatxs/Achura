@@ -1,3 +1,4 @@
+import { Txn } from '@/types/index.types';
 import {
   Card,
   CardHeader,
@@ -11,9 +12,9 @@ import {
 } from '@nextui-org/react';
 import React from 'react';
 
-function TxnPanel({txns}) {
+function TxnPanel({txns}: {txns: Txn[]}) {
   return (
-    <Card>
+    <Card className='max-w-md'>
       <CardHeader>Transactions history</CardHeader>
       <Divider />
       <Table aria-label='Txn history'>
