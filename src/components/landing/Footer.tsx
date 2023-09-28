@@ -8,10 +8,10 @@ export default function Footer (){
     return(
 
 <footer className="bg-slate-100 dark:bg-gray-900 w-full">
-    <div className="  p-4 py-6 lg:py-8">
+    <div className=" p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
-          <div className="flex place-content-center">
-                  <p className="self-center text-6xl font-semibold whitespace-nowrap dark:text-white"> 🦙 Achura</p>
+          <div className="lg:flex hidden lg:place-content-center">
+                  <p className="self-center text-4xl md:text-6xl font-semibold whitespace-nowrap dark:text-white"> 🦙 Achura</p>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
