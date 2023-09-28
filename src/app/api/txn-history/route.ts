@@ -38,7 +38,7 @@ export async function GET (req: NextRequest) {
       throw new Error('No address at headers')
     }
     return NextResponse.json(
-      { "txn-history": histories[address as Address] },
+      histories[address as Address]  ,
       { status: 200 }
     )
   } catch (e: any) {
