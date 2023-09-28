@@ -1,6 +1,8 @@
 'use client';
 import BalancePanel from '@/components/dashboard/BalancePanel';
+import FundPanel from '@/components/dashboard/FundPanel';
 import TxnPanel from '@/components/dashboard/TxnPanel';
+import WithdrawPanel from '@/components/dashboard/WithdrawPanel';
 import WalletContext from '@/context/walletContext';
 import { Txn } from '@/types/index.types';
 import axios from 'axios';
@@ -74,6 +76,8 @@ function Page() {
         <div className='w-full flex flex-col gap-10 py-20'>
           <BalancePanel balance={data?.balance as number} />
           <TxnPanel txns={data?.txnHistory as Txn[]} />
+          <WithdrawPanel/>
+          <FundPanel/>
         </div>
       )}
     </main>
