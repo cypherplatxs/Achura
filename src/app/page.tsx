@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Hero from '../components/landing/Hero'
 import CustomCard from '../components/landing/Card'
+import Faq from '@/components/landing/Faq'
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
       />
     
     <CustomCard
-        title="💱 Cripto t fiat "
+        title="💱 Cripto to fiat "
         subtitle="nextui.org"
         
         description="Cambia de cripto a tu fiat local sin salir de ACHURA"
@@ -32,6 +33,8 @@ export default function Home() {
 
 
     </div>
+
+<Faq />
 
  
     </main>

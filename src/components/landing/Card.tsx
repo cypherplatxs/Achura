@@ -21,11 +21,11 @@ interface CardProps {
 function CustomCard({ title, subtitle, description, githubLink }: CardProps) {
   
   return ( 
-    <Card className="max-w-[300px] bg-black text-withe mr-2 ml-2">
-      <CardHeader className="flex gap-3">
+    <Card className="max-w-[300px] bg-black text-withe mr-2 ml-2 ">
+      <CardHeader className="flex gap-3 ">
       
-        <div className="flex flex-col">
-          <p className="text-md ">{title}</p>
+        <div className="flex flex-col ">
+          <p className="text-2xl ">{title}</p>
           <p className="text-small text-default-500">{subtitle}</p>
         </div>
       </CardHeader>

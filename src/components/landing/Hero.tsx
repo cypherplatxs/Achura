@@ -18,7 +18,7 @@ export default function Example() {
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+             
               
               <p className="h-8 w-auto text-5xl">🦙</p>
             </a>
@@ -51,8 +51,8 @@ export default function Example() {
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
-                <p className="h-8 w-auto text-7xl">🦙</p>
+             
+                <p className="h-8 w-auto text-7xl ">🦙</p>
               </a>
               <button
                 type="button"
@@ -103,10 +103,10 @@ export default function Example() {
             }}
           />
         </div>
-        <div className="mx-auto max-w-2xl py-24 sm:py-48 lg:py-4">
+        <div className="mx-auto max-w-2xl py-24 sm:py-48 lg:py-4 ">
          
           <div className="text-center">
-            <p className='text-8xl pb-8 animate-pulse'>🦙</p>
+            <p className='text-8xl pb-8 pt-20 animate-pulse'>🦙</p>
 
             <h1 className="text-4xl font-bold tracking-tight text-withe sm:text-6xl">
              ACHURA
@@ -129,10 +129,10 @@ export default function Example() {
                 Crea tu wallet <span aria-hidden="true">→</span>
               </a>
             </div>
-            <div className="relative rounded-full px-3 py-1 pt-10 text-sm leading-6 text-withe ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+            <div className="relative rounded-full px-3 py-1 pt-10  pb-10 text-sm leading-6 text-withe ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next round of funding.{' '}
               <a href="#" className="font-semibold text-indigo-600">
-                <span className="absolute inset-0" aria-hidden="true" />
+                <span className="absolute inset-0 " aria-hidden="true" />
                 Read more <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
