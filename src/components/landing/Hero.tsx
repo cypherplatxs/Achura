@@ -15,7 +15,7 @@ export default function Example() {
 
   return (
     <div >
-      <div className="relative isolate px-6 pt-32 lg:px-8">
+      <div className="relative isolate px-6 pt-5 lg:pt-32 lg:px-8">
         <div
           className="absolute inset-x-0 top-40 z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
@@ -28,27 +28,27 @@ export default function Example() {
             }}
           />
         </div>
-        <div className="mx-auto text-center max-w-2xl py-24 flex flex-col gap-10 sm:py-48 lg:py-4 ">
+        <div className="mx-auto text-center max-w-2xl flex flex-col gap-10 ">
             <p className='text-8xl animate-pulse'>🦙</p>
-            <h1 className="text-4xl font-bold tracking-tight text-withe sm:text-6xl">
+            <h1 className="text-5xl md:text-8xl font-bold tracking-tight">
              ACHURA
             </h1>
-            <p className="text-lg leading-8 text-withe">
+            <p className="text-base leading-8 text-withe">
             Somos un proyecto para potenciar la adoción de criptomonedas y el uso de blockchains por parte de ONGS, Achura que sirve para que las ONG puedan utilizar criptomonedass y recibirlas los activos en divisas que puedan convetir a sus divisas locales
             </p>
             <div className="flex items-center justify-center gap-x-6">
               <Link
                 href="#"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Registrate
               </Link>
-              <a href="#"   className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              <a href="#"   className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
  >
-                Crea tu wallet <span aria-hidden="true">→</span>
+                Crea tu wallet
               </a>
             </div>
-            <div className="relative rounded-full px-3 py-10 text-sm leading-6 text-withe ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+            <div className="relative rounded-full px-3 py-5 lg:py-10 text-sm leading-6 text-withe ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Revisa nuestra documentación .{' '}
               <Link href="#" className="font-semibold text-indigo-600">
                 <span className="absolute inset-0 " aria-hidden="true" />

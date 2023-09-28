@@ -15,7 +15,7 @@ export default function Home() {
      <h2 className="text-center text-4xl font-semibold leading-8 text-gray-900 pt-20 pb-10">
           Que nos diferencia?
         </h2>
-     <div className="flex">
+     <div className="flex flex-col gap-5 lg:gap-0 lg:flex-row">
      
       <CustomCard
         title="🌾 Mayor Adopción "
