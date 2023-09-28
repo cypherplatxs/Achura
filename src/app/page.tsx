@@ -16,7 +16,7 @@ export default function Home() {
       <CustomCard
         title="🌾 Mayor Adopción "
         subtitle="nextui.org"
-        description="Ayudamos a las ONG para que entren al mundo de la blockchain"
+        description="Ayudamos a las mayores ONGs para que crezcan gracias a la tecnología blockchain"
         githubLink="https://github.com/nextui-org/nextui"
       />
     
@@ -24,14 +24,14 @@ export default function Home() {
         title="💱 Cripto to fiat "
         subtitle="nextui.org"
         
-        description="Cambia de cripto a tu fiat local sin salir de ACHURA"
+        description="Cambia de cripto a tu Fiat local sin salir de ACHURA"
         githubLink="https://github.com/nextui-org/nextui"
       />
          <CustomCard
         title="🦩 Uso simple"
         subtitle="nextui.org"
         
-        description="Solo necesitas tenr una wallet de NEAR "
+        description="Solo necesitas tener una wallet de NEAR "
         githubLink="https://github.com/nextui-org/nextui"
       />
 
