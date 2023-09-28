@@ -1,19 +1,10 @@
+import { Address, Histories } from '@/types/index.types'
 import { NextResponse, NextRequest } from 'next/server'
 
 //TODO: implement this with a real database or Blockchain
 
-type Address = `0x${string}`
 
-type Txn = {
-    hash: string
-    to: Address
-    amount: number
-    date: string
-}
 
-type Histories = {
-  [address in Address]?: Txn[]
-}
 
 
 const histories: Histories = {

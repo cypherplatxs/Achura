@@ -1,12 +1,8 @@
+import { Address, Balances } from '@/types/index.types'
 import { NextResponse, NextRequest } from 'next/server'
 
 //TODO: implement this with a real database or Blockchain
 
-type Address = `0x${string}`
-
-type Balances = {
-  [address in Address]?: string
-}
 
 const balances: Balances = {
   '0x1234': '1000'
