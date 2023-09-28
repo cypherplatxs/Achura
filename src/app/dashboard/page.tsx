@@ -10,6 +10,7 @@ import { Divider, User } from '@nextui-org/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
+import Nav from '@/components/landing/NavBar';
 
 enum fetchState {
   loading = 'LOADING',
@@ -75,11 +76,17 @@ function Page() {
     console.debug('address');
   }, [address]);
   return (
+   
     <main className='min-h-screen'>
+
+<div className='pb-20'>
+<Nav />
+</div>
+      
       {state === fetchState.loading && <p>Loading...</p>}
       {state === fetchState.error && <p>Something went wrong</p>}
       {state === fetchState.success && (
-        <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10'>
+        <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
           <User
             className='user flex justify-start'
             name={data?.user.name as string}

@@ -2,10 +2,14 @@ import Image from 'next/image'
 import Hero from '../components/landing/Hero'
 import CustomCard from '../components/landing/Card'
 import Faq from '@/components/landing/Faq'
+import Nav from '@/components/landing/NavBar'
+
 
 export default function Home() {
   return (
     <main className='min-h-screen w-full flex flex-col gap-10 justify-center items-center'>
+     
+     <Nav />
      <Hero />
      <div className="flex">
      

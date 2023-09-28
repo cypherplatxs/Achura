@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@nextui-org/react": "^2.1.13",
+    "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "next": "latest",
     "react": "latest",
