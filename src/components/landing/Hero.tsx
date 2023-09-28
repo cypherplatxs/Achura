@@ -10,7 +10,7 @@ const navigation = [
 ]
 
 export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
 
   return (
     <div className="bg-black">

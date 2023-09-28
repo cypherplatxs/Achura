@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {DB} from '@/constants/utils'
+import {UsersDB} from '@/constants/utils'
 export async function GET(req:NextRequest){
     try{
         const headers = new Headers(req.headers)
@@ -7,7 +7,7 @@ export async function GET(req:NextRequest){
         if(!address){
         throw new Error('No address at headers')
         }
-        const user = DB.find((user)=>user.address === address)
+        const user = UsersDB.find((user)=>user.address === address)
         if(!user){
         throw new Error('User not found')
         }

@@ -1,3 +1,4 @@
-import DB from '@/db/users.json'
+import UsersDB from '@/db/users.json'
+import OrgsDB from '@/db/orgs.json'
 
-export { DB }
+export { UsersDB, OrgsDB }
