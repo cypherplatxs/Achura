@@ -5,7 +5,7 @@ export type Balances = {
   }
   
 
-type Txn = {
+export type Txn = {
     hash: string
     to: Address
     amount: number
