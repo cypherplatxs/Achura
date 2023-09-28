@@ -3,7 +3,7 @@ import React from 'react';
 
 function BalancePanel({ balance }: { balance: number }) {
   return (
-    <Card className='max-w-md'>
+    <Card className='balance'>
       <CardHeader>Current balance</CardHeader>
       <Divider />
       <CardBody>${balance} Usd </CardBody>

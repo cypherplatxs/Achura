@@ -3,7 +3,7 @@ import React from 'react'
 
 function WithdrawPanel() {
   return (
-    <Card className='max-w-md'>
+    <Card className='with_Fund'>
         <CardHeader>
             Withdraw funds
         </CardHeader>

@@ -14,7 +14,7 @@ import React from 'react';
 
 function TxnPanel({txns}: {txns: Txn[]}) {
   return (
-    <Card className='max-w-md'>
+    <Card className='txnHistory'>
       <CardHeader>Transactions history</CardHeader>
       <Divider />
       <Table aria-label='Txn history'>

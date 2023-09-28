@@ -17,9 +17,6 @@ export type Histories = {
     [address in Address]?: Txn[]
   }
 
-export type User = {
-    name:`${string}.near`
-    address: Address
-}
+
 
 export type WalletContextType = Address

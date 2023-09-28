@@ -52,7 +52,7 @@ function FundPanel() {
               </form>
         </ModalContent>
       </Modal>
-      <Card className='max-w-md'>
+      <Card className='with_fund'>
         <CardHeader>Fund your account!</CardHeader>
         <Divider />
         <CardBody>
