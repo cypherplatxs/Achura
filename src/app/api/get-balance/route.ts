@@ -15,6 +15,9 @@ export async function GET (req: NextRequest) {
     if (!address) {
       throw new Error('No address at headers')
     }
+    if (!balances.hasOwnProperty(address as Address)) {
+      throw new Error('Address not found in balances');
+    }
     return NextResponse.json(
       { balance: balances[address as Address] },
       { status: 200 }
