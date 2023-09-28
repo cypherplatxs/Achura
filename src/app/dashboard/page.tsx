@@ -1,10 +1,11 @@
 'use client';
 import BalancePanel from '@/components/dashboard/BalancePanel';
 import FundPanel from '@/components/dashboard/FundPanel';
+import OrgListPanel from '@/components/dashboard/OrgListPanel';
 import TxnPanel from '@/components/dashboard/TxnPanel';
 import WithdrawPanel from '@/components/dashboard/WithdrawPanel';
 import WalletContext from '@/context/walletContext';
-import { Txn } from '@/types/index.types';
+import { Organization, Txn } from '@/types/index.types';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
@@ -15,10 +16,12 @@ enum fetchState {
   success = 'SUCCESS',
 }
 
+
 type DashboardData = {
   balance: number;
   txnHistory: Txn[];
   userRole: 'Founder' | 'Organization';
+  orgs:Organization[]
 };
 
 function Page() {
@@ -45,6 +48,8 @@ function Page() {
             Address: address,
           },
         });
+        const orgsResponse = await axios.get('/api/get-orgs')
+        const {orgs } = orgsResponse.data
         const { txnHistory } = txnHistoryResponse.data;
         const { balance } = balanceResponse.data;
         const { user } = userResponse.data;
@@ -53,6 +58,7 @@ function Page() {
           balance,
           txnHistory,
           userRole: user.role,
+          orgs
         });
         setState(fetchState.success);
       } catch (e) {
@@ -78,6 +84,7 @@ function Page() {
           <TxnPanel txns={data?.txnHistory as Txn[]} />
           <WithdrawPanel/>
           <FundPanel/>
+          <OrgListPanel orgs={data?.orgs as Organization[]} />
         </div>
       )}
     </main>
