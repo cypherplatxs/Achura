@@ -1,11 +1,14 @@
-import React from 'react'
+import { Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
+import React from 'react';
 
-function BalancePanel() {
+function BalancePanel({ balance }: { balance: number }) {
   return (
-    <div>
-        
-    </div>
-  )
+    <Card className='max-w-md'>
+      <CardHeader>Current balance</CardHeader>
+      <Divider />
+      <CardBody>${balance} Usd </CardBody>
+    </Card>
+  );
 }
 
-export default BalancePanel
+export default BalancePanel;
