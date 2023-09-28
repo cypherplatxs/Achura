@@ -3,6 +3,11 @@
     "name": "idk.near",
     "address": "0x1234",
     "role": "Organization"
+  },
+  {
+    "name": "idk.near",
+    "address": "0x2345",
+    "role": "Founder"
   }
 ]
 

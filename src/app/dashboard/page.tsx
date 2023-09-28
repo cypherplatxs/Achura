@@ -13,11 +13,11 @@ enum fetchState {
   success = 'SUCCESS',
 }
 
-
 type DashboardData = {
   balance: number;
-  txnHistory: Txn[]
-}
+  txnHistory: Txn[];
+  userRole: 'Founder' | 'Organization';
+};
 
 function Page() {
   const address = useContext(WalletContext);
@@ -33,17 +33,24 @@ function Page() {
             Address: address,
           },
         });
-        const txnHistoryResponse = await axios.get('/api/txn-history',{
+        const txnHistoryResponse = await axios.get('/api/txn-history', {
           headers: {
             Address: address,
           },
-        })
-        const {txnHistory} = txnHistoryResponse.data;
+        });
+        const userResponse = await axios.get('/api/user', {
+          headers: {
+            Address: address,
+          },
+        });
+        const { txnHistory } = txnHistoryResponse.data;
         const { balance } = balanceResponse.data;
-        console.debug(txnHistoryResponse)
+        const { user } = userResponse.data;
+        console.debug(txnHistoryResponse);
         setData({
           balance,
           txnHistory,
+          userRole: user.role,
         });
         setState(fetchState.success);
       } catch (e) {
@@ -61,10 +68,10 @@ function Page() {
     <main className='min-h-screen'>
       {address}
       {state === fetchState.success && (
-      <div className='w-full flex flex-col gap-10 py-20'>
-      <BalancePanel balance={data?.balance as number} />
-      <TxnPanel txns={data?.txnHistory} />
-      </div>
+        <div className='w-full flex flex-col gap-10 py-20'>
+          <BalancePanel balance={data?.balance as number} />
+          <TxnPanel txns={data?.txnHistory as Txn[]} />
+        </div>
       )}
     </main>
   );
