@@ -21,7 +21,10 @@ interface CardProps {
 function CustomCard({ title, subtitle, description, githubLink }: CardProps) {
   
   return ( 
+
+  
     <Card className="max-w-[300px] text-withe mr-2 ml-2 ">
+
       <CardHeader className="flex gap-3 ">
       
         <div className="flex flex-col ">

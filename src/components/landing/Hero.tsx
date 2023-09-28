@@ -49,7 +49,7 @@ export default function Example() {
               </a>
             </div>
             <div className="relative rounded-full px-3 py-10 text-sm leading-6 text-withe ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of funding.{' '}
+              Revisa nuestra documentación .{' '}
               <Link href="#" className="font-semibold text-indigo-600">
                 <span className="absolute inset-0 " aria-hidden="true" />
                 Read more <span aria-hidden="true">&rarr;</span>
