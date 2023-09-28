@@ -13,10 +13,10 @@ let User = {}
 //TODO: implementar validaciones mas precisas con ZOD, JSON Schema o Joi
 function validateData (
   userType: 'organization' | 'founder',
-  userData: Founder | Organization
+  userData: FounderUser | OrganizationUser
 ) {
   if (userType === 'founder') {
-    const { walletName, address, accountName }: Founder = userData as Founder
+    const { walletName, address, accountName }: FounderUser = userData as FounderUser
     if (
       walletName &&
       address &&
@@ -36,7 +36,7 @@ function validateData (
       taxRegistrationNumber,
       country,
       legalRepresentative
-    }: Organization = userData as Organization
+    }: OrganizationUser = userData as OrganizationUser
     if (
       walletName &&
       address &&
