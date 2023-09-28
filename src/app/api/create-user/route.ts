@@ -1,4 +1,4 @@
-import { Founder, Organization } from '@/types/user.types'
+import { FounderUser, OrganizationUser } from '@/types/user.types'
 import { NextResponse, NextRequest } from 'next/server'
 
 
@@ -61,7 +61,7 @@ export async function POST (req: NextRequest) {
   const body = await req.json()
   if (body.userType === 'founder') {
     try {
-      const { userType, walletName, address, accountName }: Founder = body
+      const { userType, walletName, address, accountName }: FounderUser = body
       validateData(userType, body)
       User = {
         userType,
@@ -83,7 +83,7 @@ export async function POST (req: NextRequest) {
         taxRegistrationNumber,
         country,
         legalRepresentative
-      }: Organization = body
+      }: OrganizationUser = body
       validateData(userType, body)
       User = {
         userType,

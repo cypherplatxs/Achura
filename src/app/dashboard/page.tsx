@@ -5,7 +5,8 @@ import OrgListPanel from '@/components/dashboard/OrgListPanel';
 import TxnPanel from '@/components/dashboard/TxnPanel';
 import WithdrawPanel from '@/components/dashboard/WithdrawPanel';
 import WalletContext from '@/context/walletContext';
-import { Organization, Txn } from '@/types/index.types';
+import { Organization, Txn, UserType } from '@/types/index.types';
+import { Divider, User } from '@nextui-org/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
@@ -16,12 +17,12 @@ enum fetchState {
   success = 'SUCCESS',
 }
 
-
 type DashboardData = {
   balance: number;
   txnHistory: Txn[];
+  user: UserType;
   userRole: 'Founder' | 'Organization';
-  orgs:Organization[]
+  orgs: Organization[];
 };
 
 function Page() {
@@ -48,17 +49,18 @@ function Page() {
             Address: address,
           },
         });
-        const orgsResponse = await axios.get('/api/get-orgs')
-        const {orgs } = orgsResponse.data
+        const orgsResponse = await axios.get('/api/get-orgs');
+        const { orgs } = orgsResponse.data;
         const { txnHistory } = txnHistoryResponse.data;
         const { balance } = balanceResponse.data;
         const { user } = userResponse.data;
-        console.debug(txnHistoryResponse);
+        console.debug(user);
         setData({
           balance,
           txnHistory,
+          user,
           userRole: user.role,
-          orgs
+          orgs,
         });
         setState(fetchState.success);
       } catch (e) {
@@ -74,16 +76,21 @@ function Page() {
   }, [address]);
   return (
     <main className='min-h-screen'>
-      {address}
-      {state === fetchState.success && <p>{data?.userRole}</p>}
       {state === fetchState.loading && <p>Loading...</p>}
       {state === fetchState.error && <p>Something went wrong</p>}
       {state === fetchState.success && (
-        <div className='w-full flex flex-col gap-10 py-20'>
+        <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10'>
+          <User
+            className='user flex justify-start'
+            name={data?.user.name as string}
+            description={data?.user.role as string}
+            avatarProps={{
+              src: 'https://i.pravatar.cc',
+            }}
+          />
           <BalancePanel balance={data?.balance as number} />
           <TxnPanel txns={data?.txnHistory as Txn[]} />
-          <WithdrawPanel/>
-          <FundPanel/>
+          {data?.userRole === 'Founder' ? <FundPanel /> : <WithdrawPanel />}
           <OrgListPanel orgs={data?.orgs as Organization[]} />
         </div>
       )}

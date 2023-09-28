@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .dashboard__lg {
+    grid-template-areas:
+      'user user'
+      'balance txnHistory'
+      'with_Fund txnHistory'
+      'orgList orgList';
+    @apply grid p-10;
+  }
+  .balance {
+    grid-area: balance;
+  }
+  .txnHistory {
+    grid-area: txnHistory;
+  }
+  .with_Fund {
+    grid-area: with_Fund;
+  }
+  .orgList {
+    grid-area: orgList;
+  }
+  .user{
+    grid-area: user;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

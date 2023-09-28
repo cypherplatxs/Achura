@@ -1,10 +1,11 @@
-import { User } from '@/types/index.types'
+import { UserType } from '@/types/index.types'
 import { NextRequest, NextResponse } from 'next/server'
 
-const users: User[] = [
+const users: UserType[] = [
   {
     name: 'idk.near',
-    address: '0x1234'
+    address: '0x1234',
+    role:'organization'
   }
 ]
 
