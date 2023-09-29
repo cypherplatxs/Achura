@@ -1,12 +1,12 @@
 [package]
-name = "achuraContracts"
+name = "achura_contracts"
 version = "0.1.0"
 edition = "2021"
 authors = ["Cypherplatxs"]
 
 [dependencies]
 near-sdk = "4.1.1"
-borsh = "0.9.3"
 
 [lib]
 path = "lib.rs"
+crate-type = ["cdylib"]
