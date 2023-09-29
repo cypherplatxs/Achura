@@ -1,5 +1,5 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::{env, near_bindgen, AccountId, Balance, Timestamp};
+use near_sdk::{env, near_bindgen, AccountId, Balance, Timestamp, Promise, PromiseResult, Gas};
 // use near_sdk::collections::UnorderedMap;
 use near_sdk::serde::Serialize;
 
@@ -67,7 +67,32 @@ impl Transaction {
     // Función para realizar un retiro
     #[payable]
     pub fn withdraw(&mut self) -> Promise {
-        
+        let attached_amount = env::attached_deposit();
+        let sender = env::predecessor_account_id();
+
+        let callback_id: AccountId;
+        let method_name = "on_withdraw_done".to_string();
+        let input: Vec<u8> = vec![];
+        let gas: u128 = 30_000_000_000;
+        let attached_near: Gas = near_sdk::Gas(30_000_000_000);
+
+        let callback: Promise = env::promise_create(
+            callback_id, &method_name, &input, gas, attached_near);
+
+        Promise::new(sender.clone()).transfer(attached_amount).then(callback)
+    }
+
+    pub fn on_withdraw_done(&mut self) -> Promise {
+        match env::promise_result(0) {
+            PromiseResult::Successful(_) => {
+                // The transfer was successful...
+            }
+            _ => {
+                // Handle an unsuccessful transfer...
+            }
+        }
+
+        Promise::new(env::current_account_id())
     }
 }
 
