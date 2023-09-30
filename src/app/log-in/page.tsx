@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image'
 import Nav from '@/components/landing/NavBar';
 import Footer from '@/components/landing/Footer';
+import Link from 'next/link';
 
 const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
@@ -37,9 +38,9 @@ export default function Example() {
 
           <p className="mt-10 text-center text-sm text-gray-500">
           👛 Aun no tienes{' '} 
-            <a href="https://www.mynearwallet.com/" target='_blank'  className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <Link href="https://www.mynearwallet.com/" target='_blank'  className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
              Near Wallet de Near?
-            </a>
+            </Link>
           </p>
         </div>
       </div>
