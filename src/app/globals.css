@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '../../node_modules/@near-wallet-selector/modal-ui/styles.css';
+
 @layer base {
   .dashboard__lg {
     grid-template-areas:
@@ -26,6 +28,9 @@
   .user{
     grid-area: user;
   }
+
+
+  
 }
 
 /* :root {

@@ -11,8 +11,15 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@near-wallet-selector/core": "^8.5.3",
+    "@near-wallet-selector/modal-ui": "^8.5.3",
+    "@near-wallet-selector/my-near-wallet": "^8.5.3",
     "@nextui-org/react": "^2.1.13",
     "axios": "^1.5.1",
+    "big.js": "^6.2.1",
+    "bn.js": "^5.2.1",
+    "framer-motion": "^10.16.4",
+    "near-api-js": "^0.44.2",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
