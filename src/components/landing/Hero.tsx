@@ -38,19 +38,19 @@ export default function Example() {
             </p>
             <div className="flex items-center justify-center gap-x-6">
               <Link
-                href="#"
+                href="/sign-up"
                 className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Registrate
               </Link>
-              <a href="#"   className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              <Link target='_blank' href="https://www.mynearwallet.com/"   className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
  >
                 Crea tu wallet
-              </a>
+              </Link>
             </div>
             <div className="relative rounded-full px-3 py-5 lg:py-10 text-sm leading-6 text-withe ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Revisa nuestra documentación .{' '}
-              <Link href="#" className="font-semibold text-indigo-600">
+              <Link href="https://platohedro.org/" className="font-semibold text-indigo-600">
                 <span className="absolute inset-0 " aria-hidden="true" />
                 Read more <span aria-hidden="true">&rarr;</span>
               </Link>
