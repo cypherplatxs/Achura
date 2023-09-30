@@ -1,9 +1,21 @@
 'use client'
 import React from 'react'
 import { useState } from 'react'
-import Nav from '@/components/landing/NavBar'
-import Footer from '@/components/landing/Footer'
-import { Button, Divider, Input, Select, SelectItem, Textarea } from '@nextui-org/react'
+import {
+  Button,
+  Divider,
+  Input,
+  Select,
+  SelectItem,
+  Textarea,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure
+} from '@nextui-org/react'
+import useWallet from '@/hooks/useWallet'
 
 const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault()
@@ -13,7 +25,20 @@ const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
 export default function Example () {
   const [role, setRole] = useState<string>()
-  console.debug(role)
+  const { openWalletModal, accountId, disconnectWallet } = useWallet()
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+
+  const handleOnSubmit = (e : React.FormEvent) => {
+    e.preventDefault()
+    if (!accountId) {
+      onOpen()
+      return
+    }
+    //TODO: implementar lógica de submit y añadir el endpoint create-user
+
+  }
+
+  console.debug(accountId)
   return (
     <main className='min-h-screen w-screen relative'>
       <div
@@ -30,8 +55,7 @@ export default function Example () {
       </div>
 
       <div className='min-h-[90vh] flex justify-center items-center flex-col w-full'>
-        <form className='w-1/2 flex flex-col gap-5'>
-
+        <form onSubmit={handleOnSubmit} className='w-1/2 flex flex-col gap-5'>
           <p className='text-center text-8xl animate-pulse'> 🦙</p>
           <h2 className='text-center font-bold text-4xl'>Join to Achura</h2>
           <Select
@@ -54,26 +78,26 @@ export default function Example () {
                 label='Organization name'
                 placeholder='Some Org'
               />
-            
-                <Input
+
+              <Input
                 isRequired
                 inputMode='text'
                 label='Country'
                 placeholder='Colombia'
               />
-                 <Input
+              <Input
                 isRequired
                 inputMode='text'
                 label='Legal representative'
                 placeholder='Juan Perez'
               />
-                 <Input
+              <Input
                 isRequired
                 inputMode='numeric'
                 label='Tax registry number'
                 placeholder='219021...'
               />
-                <Textarea
+              <Textarea
                 className='grid col-span-2'
                 isRequired
                 inputMode='text'
@@ -82,13 +106,37 @@ export default function Example () {
               />
             </div>
           )}
-          <Button color='primary'>Conect your wallet</Button>
+          <Button
+            onPress={accountId ? disconnectWallet : openWalletModal}
+            color='primary'
+          >
+            {accountId ? 'Disconnect wallet' : 'Connect your wallet'}
+          </Button>
           <Divider />
           <Button variant='bordered' color='primary' type='submit'>
             Sign-up
           </Button>
         </form>
       </div>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {onClose => (
+            <>
+              <ModalHeader className='flex flex-col gap-1'>
+                Remember
+              </ModalHeader>
+              <ModalBody>
+                <p>You must connect your wallet to sign-up in the DApp</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color='primary' onPress={onClose}>
+                  Sure!
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </main>
   )
 }

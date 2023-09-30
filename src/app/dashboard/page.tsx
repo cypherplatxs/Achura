@@ -15,6 +15,7 @@ import OrgListPanelSkeleton from '@/components/dashboard/skeleton/OrgListPanelSk
 import WithdrawPanelSkeleton from '@/components/dashboard/skeleton/WithdrawPanelSkeleton'
 import TxnPanelSkeleton from '@/components/dashboard/skeleton/TxnPanelSkeleton'
 import { useWalletSelector } from '@/context/wallectSelectorContext'
+import useWallet from '@/hooks/useWallet'
 
 enum fetchState {
   loading = 'LOADING',
@@ -34,7 +35,8 @@ function Page () {
   const address = useContext(WalletContext)
   const [data, setData] = useState<DashboardData | null>(null)
   const [state, setState] = useState<fetchState>(fetchState.loading)
-  const { selector, modal, accounts, accountId } = useWalletSelector();
+  const {openWalletModal} = useWallet()
+
 
   useEffect(() => {
     async function getAllData () {
@@ -82,7 +84,6 @@ function Page () {
   }, [address])
   return (
     <main className='min-h-screen'>
-      <button onClick={()=>modal.show()}>AAA</button>
       {state === fetchState.loading && (
         <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
           <div className='max-w-[300px] w-full flex items-center gap-3'>
