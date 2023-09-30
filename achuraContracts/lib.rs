@@ -1,11 +1,10 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::{env, near_bindgen, AccountId, Balance, Timestamp, Promise, PromiseResult, Gas};
-// use near_sdk::collections::UnorderedMap;
-use near_sdk::serde::Serialize;
+use near_sdk::{env, near_bindgen, AccountId, Balance, Timestamp, Promise};
+use near_sdk::serde::{Serialize, Deserialize};
 
 // Definición de la estructura de datos para rastrear depósitos y retiros
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, Serialize)]
+#[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone)]
 #[serde(crate = "near_sdk::serde")]
 pub struct Transaction {
   sender: AccountId,
@@ -18,7 +17,7 @@ pub struct Transaction {
 
 // Definición de la estructura para el rastreo de transacciones
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, Serialize)]
+#[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone)]
 #[serde(crate = "near_sdk::serde")]
 pub struct Transactions {
     transactions: Vec<Transaction>
@@ -70,35 +69,23 @@ impl Transaction {
         let attached_amount = env::attached_deposit();
         let sender = env::predecessor_account_id();
 
-        let callback_id: AccountId;
-        let method_name = "on_withdraw_done".to_string();
-        let input: Vec<u8> = vec![];
-        let gas: u128 = 30_000_000_000;
-        let attached_near: Gas = near_sdk::Gas(30_000_000_000);
+        // let callback_id: AccountId = sender.clone();
+        // let method_name = "on_withdraw_done".to_string();
+        // let input: Vec<u8> = vec![];
+        // let gas: Gas = near_sdk::Gas(30_000_000_000);
+        // let attached_near: Gas = near_sdk::Gas(30_000_000_000);
 
-        let callback: Promise = env::promise_create(
-            callback_id, &method_name, &input, gas, attached_near);
+        // let callback: Promise = env::promise_create(
+        //     callback_id, &method_name, &input, attached_amount, gas);
 
-        Promise::new(sender.clone()).transfer(attached_amount).then(callback)
-    }
-
-    pub fn on_withdraw_done(&mut self) -> Promise {
-        match env::promise_result(0) {
-            PromiseResult::Successful(_) => {
-                // The transfer was successful...
-            }
-            _ => {
-                // Handle an unsuccessful transfer...
-            }
-        }
-
-        Promise::new(env::current_account_id())
+        Promise::new(sender).transfer(attached_amount)
     }
 }
 
-
-//     // Función para obtener el historial de transacciones
-//     // pub fn get_transaction_history(&self) -> Vec<Transaction> {
-//     //     self.transactions.clone()
-//     // }
-// }
+#[near_bindgen]
+impl Transactions {
+    // Función para obtener el historial de transacciones
+    pub fn get_transaction_history(&self) -> Vec<Transaction> {
+        self.transactions.clone()
+    }
+}
