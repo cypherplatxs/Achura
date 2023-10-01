@@ -1,20 +1,19 @@
 import { users } from '@/services';
+import { User } from '@/types';
 import { useState } from 'react';
 
 export function useSignUp() {
     const [error, setError] = useState<string | null>(null)
-    const [data, setData] = useState<any>(null)
+    const [data, setData] = useState<User | null>(null)
 
-    const handleSignUp = async (data: any) => {
+    const handleSignUp = async (data: User) => {
         try {
             const res = await users.register(data)
             setData(res)
-
         } catch (error) {
             setError(JSON.stringify(error))
         }
     }
-
 
     return {
         data,

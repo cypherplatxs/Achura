@@ -16,6 +16,8 @@ import {
   useDisclosure
 } from '@nextui-org/react'
 import { useWallet, useSignUp } from '@/hooks'
+import defaultUser from './default-user.json'
+import { User } from '@/types'
 
 
 export default function () {
@@ -33,7 +35,10 @@ export default function () {
       return
     }
     setIsLoading(true)
-    await handleSignUp(accountId)
+
+    // TODO: use form data
+    await handleSignUp(defaultUser as User)
+
     setIsLoading(false)
   }
 

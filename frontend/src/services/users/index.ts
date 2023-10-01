@@ -1,12 +1,14 @@
 import { config } from "@/services";
+import { User } from "@/types";
 import axios from "axios";
 
-export const register = async (data: string) => {
+export const register = async (data: User) => {
     try {
+
         const response = await axios.post(
             `${config.API_BASE_URL}/users/register`,
             {
-                data
+                ...data
             }
         )
         return response.data

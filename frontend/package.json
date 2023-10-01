@@ -22,6 +22,7 @@
     "big.js": "^6.2.1",
     "bn.js": "^5.2.1",
     "encoding": "^0.1.13",
+    "firebase": "^10.4.0",
     "framer-motion": "^10.16.4",
     "near-api-js": "^1.0.0",
     "next": "latest",

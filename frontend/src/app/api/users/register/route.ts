@@ -1,27 +1,36 @@
 import { NextRequest } from "next/server";
+import { firebase } from "@/api-services";
+import { User } from "@/types";
 
 export async function POST(request: NextRequest) {
-    const data = await request.json()
+    try {
+        const data: User = await request.json()
+        console.log(data);
 
-    console.log(data);
 
+        // verify wallet id is new
 
+        // get kyc data from request body
 
-    // verify wallet id is new
+        // hash kyc data
 
-    // get kyc data from request body
+        // verify kyc data hash is new
 
-    // hash kyc data
+        // save kyc data on kyc db
+        await firebase.addData(
+            'users',
+            data.accountName,
+            data
+        )
 
-    // verify kyc data hash is new
+        // save kyc-data-id and wallet-id on users db
 
-    // save kyc data on kyc db
+        // return success message
 
-    // save kyc-data-id and wallet-id on users db
-
-    // return success message
-
-    return Response.json({ data: "success" })
+        return Response.json({ data: "success" })
+    } catch (error) {
+        return Response.json({ error: "internal error" })
+    }
 }
 
 // TODO: catch other routes on global err
