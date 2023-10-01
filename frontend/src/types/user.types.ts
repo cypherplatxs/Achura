@@ -19,9 +19,8 @@ type LegalEntity = {
 }
 
 type Wallet = {
-  walletName: string,
-  address: string
-  accountName: string
+  accountId: string,
+  publicKey: string
 }
 
 export type User = Wallet & Representative & LegalEntity & {

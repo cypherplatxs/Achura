@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
         // save kyc data on kyc db
         await firebase.addData(
             'users',
-            data.accountName,
+            data.accountId,
             data
         )
 
