@@ -13,7 +13,7 @@ import { useWalletSelector } from '@/context/wallectSelectorContext'
  *  - accountId: The ID of the currently selected account.
  */
 
-function useWallet () {
+export function useWallet() {
   const { selector, modal, accounts, accountId } = useWalletSelector()
 
   const handleSignIn = () => {
@@ -29,7 +29,5 @@ function useWallet () {
     })
   }
 
-  return { openWalletModal : handleSignIn, disconnectWallet : handleSignOut, accounts, accountId }
+  return { openWalletModal: handleSignIn, disconnectWallet: handleSignOut, accounts, accountId }
 }
-
-export default useWallet

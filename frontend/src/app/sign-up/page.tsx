@@ -15,30 +15,28 @@ import {
   ModalFooter,
   useDisclosure
 } from '@nextui-org/react'
-import useWallet from '@/hooks/useWallet'
+import { useWallet, useSignUp } from '@/hooks'
 
-const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault()
-  //TODO: implementar lógica de submit
-  // axios.post('/api/create-user' ...)
-}
 
-export default function Example () {
+export default function () {
   const [role, setRole] = useState<string>()
+  const { handleSignUp, error } = useSignUp()
+  const [isLoading, setIsLoading] = useState(false)
   const { openWalletModal, accountId, disconnectWallet } = useWallet()
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
-  const handleOnSubmit = (e : React.FormEvent) => {
+  const handleOnSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!accountId) {
       onOpen()
       return
     }
-    //TODO: implementar lógica de submit y añadir el endpoint create-user
-
+    setIsLoading(true)
+    await handleSignUp(accountId)
+    setIsLoading(false)
   }
 
-  console.debug(accountId)
   return (
     <main className='min-h-screen w-screen relative'>
       <div
@@ -106,16 +104,23 @@ export default function Example () {
               />
             </div>
           )}
-          <Button
-            onPress={accountId ? disconnectWallet : openWalletModal}
-            color='primary'
-          >
-            {accountId ? 'Disconnect wallet' : 'Connect your wallet'}
-          </Button>
           <Divider />
-          <Button variant='bordered' color='primary' type='submit'>
-            Sign-up
-          </Button>
+          {error && <p className='text-center'>error</p>}
+          {isLoading && <p className='text-center'>Loading...</p>}
+          {
+            accountId ?
+              <Button isDisabled={isLoading || !role} color='primary' type='submit'>
+                Sign-up
+              </Button>
+              :
+              <Button
+                onPress={openWalletModal}
+                color='primary'
+              >
+                Connect your wallet
+              </Button>
+          }
+
         </form>
       </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

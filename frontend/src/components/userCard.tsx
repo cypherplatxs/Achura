@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader
 } from '@nextui-org/react'
-import useWallet from '@/hooks/useWallet'
+import { useWallet } from '@/hooks'
 
 export const UserTwitterCard = () => {
   const { accountId, disconnectWallet } = useWallet()

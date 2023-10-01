@@ -17,7 +17,7 @@ import {
   PopoverTrigger,
   User
 } from '@nextui-org/react'
-import useWallet from '@/hooks/useWallet'
+import { useWallet } from '@/hooks'
 import { UserTwitterCard } from '../userCard'
 
 const navigation = [
@@ -26,7 +26,7 @@ const navigation = [
   { name: 'Mas info', href: '/sign-in' }
 ]
 
-export default function Nav () {
+export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
   const { accountId } = useWallet()
 
@@ -79,7 +79,7 @@ export default function Nav () {
               </PopoverTrigger>
               <PopoverContent className='p-1'>
                 <UserTwitterCard
-                 />
+                />
               </PopoverContent>
             </Popover>
           </NavbarItem>
@@ -104,8 +104,8 @@ export default function Nav () {
                 index === 2
                   ? 'primary'
                   : index === navigation.length - 1
-                  ? 'danger'
-                  : 'foreground'
+                    ? 'danger'
+                    : 'foreground'
               }
               className='w-full'
               href='#'

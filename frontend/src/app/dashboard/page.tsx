@@ -15,7 +15,7 @@ import OrgListPanelSkeleton from '@/components/dashboard/skeleton/OrgListPanelSk
 import WithdrawPanelSkeleton from '@/components/dashboard/skeleton/WithdrawPanelSkeleton'
 import TxnPanelSkeleton from '@/components/dashboard/skeleton/TxnPanelSkeleton'
 import { useWalletSelector } from '@/context/wallectSelectorContext'
-import useWallet from '@/hooks/useWallet'
+import { useWallet } from '@/hooks'
 
 enum fetchState {
   loading = 'LOADING',
@@ -31,15 +31,15 @@ type DashboardData = {
   orgs: Organization[]
 }
 
-function Page () {
+function Page() {
   const address = useContext(WalletContext)
   const [data, setData] = useState<DashboardData | null>(null)
   const [state, setState] = useState<fetchState>(fetchState.loading)
-  const {openWalletModal} = useWallet()
+  const { openWalletModal } = useWallet()
 
 
   useEffect(() => {
-    async function getAllData () {
+    async function getAllData() {
       //TODO: add parallel fetch
       try {
         const balanceResponse = await axios.get('/api/get-balance', {
