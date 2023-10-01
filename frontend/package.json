@@ -2,6 +2,9 @@
   "name": "achura",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "^18"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -18,8 +21,9 @@
     "axios": "^1.5.1",
     "big.js": "^6.2.1",
     "bn.js": "^5.2.1",
+    "encoding": "^0.1.13",
     "framer-motion": "^10.16.4",
-    "near-api-js": "^0.44.2",
+    "near-api-js": "^1.0.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
