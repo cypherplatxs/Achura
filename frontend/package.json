@@ -1,0 +1,42 @@
+{
+  "name": "achura",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "^18"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@near-wallet-selector/core": "^8.5.3",
+    "@near-wallet-selector/modal-ui": "^8.5.3",
+    "@near-wallet-selector/my-near-wallet": "^8.5.3",
+    "@nextui-org/react": "^2.1.13",
+    "axios": "^1.5.1",
+    "big.js": "^6.2.1",
+    "bn.js": "^5.2.1",
+    "encoding": "^0.1.13",
+    "framer-motion": "^10.16.4",
+    "near-api-js": "^1.0.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
+}
