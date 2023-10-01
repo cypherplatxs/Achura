@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Burger",
+        "description": "A delicious burger for hunger childrens"
+    },
+    {
+        "name": "Pizza",
+        "description": "A delicious pizza for hunger childrens"
+    },
+    {
+        "name": "Pasta",
+        "description": "A delicious pasta for hunger childrens"
+    }
+]

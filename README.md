@@ -1,39 +1,37 @@
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Getting Started
 
-<img align='right' src='https://user-images.githubusercontent.com/5713670/87202985-820dcb80-c2b6-11ea-9f56-7ec461c497c3.gif' width='200'>
+First, run the development server:
 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-<a href="https://achura.co/" target="_blank"> <h1 align="center">  🦙  Achura</h1></a>
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-<h2 align="center">Empowering NGO's </h2>
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-<p>Achura es un proyecto para potenciar la adoción de criptomonedas y el uso de blockchains por parte de ONGS, Achura que sirve para que las ONG puedan utilizar criptomonedass y recibirlas los activos en divisas que puedan convetir as sus divisas locales</p>
+## Learn More
 
 <p>Achura espera resolver los problemas de las ong que resiven dinero desde  cooperación internaconal y constantemente pierden dinero en los cambios de divisas y en los costos de transacción de los bancos 
 </p>
 
-<p> Achura utiliza <a href="https://www.kravata.co/">Kratava</a> para cambiar los actvos locales en criptomonedas y viceversa</p>
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-<details>
-<summary> <h1><b> Preguntas frecuentes</b> </h1></summary>
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-<h1>Cómo usar Achura</h1>
-<h1>KYC </h1>
+## Deploy on Vercel
 
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-</details>
-
-<h1>Documentación</h1>
-
-<h2 align="center"> <img src="https://64.media.tumblr.com/21ec7fd483694997f0ebb7613eb7997a/12956cb4d7d9149f-8b/s500x750/2767da49935505d03aa4f4bed732dfa5e85f9a28.gif" width="200" /> <a href="#"> </a></h2>
-
-
-[@Luis](https://github.com/Another-DevX) | [@Sandusky](https://github.com/cold-briu) | [@Noisk8](https://github.com/noisk8) | [@Juminstock](https://github.com/juminstock)
---- | --- | --- | ---
- ![JOUSELUIS2](https://github.com/cypherplatxs/Achura/assets/17709296/c5cd40ab-8aea-4915-8c71-e61aeb3702dc)| ![SANDUSKY](https://github.com/cypherplatxs/Achura/assets/17709296/315484e9-d6ef-4621-8c15-f04605a83622) | ![NOIISK8](https://github.com/cypherplatxs/Achura/assets/17709296/7f9b6626-b00d-42d3-9afc-56dd996cb487)| ![KALICHE](https://github.com/cypherplatxs/Achura/assets/17709296/b7912411-9e72-41d5-abdd-8a3b00f05f40)
-
-
-[@Platoboss](https://github.com/platoboss) | 
---- | 
-![DONAL](https://github.com/cypherplatxs/Achura/assets/17709296/88de85c2-2f9e-4367-876e-027096afa264)| 
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
