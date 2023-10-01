@@ -10,7 +10,7 @@ import {
 } from '@nextui-org/react'
 import { useWallet } from '@/hooks'
 
-export const UserTwitterCard = () => {
+export const UserCard = () => {
   const { accountId, disconnectWallet } = useWallet()
 
   return (

@@ -18,7 +18,7 @@ import {
   User
 } from '@nextui-org/react'
 import { useWallet } from '@/hooks'
-import { UserTwitterCard } from '../userCard'
+import { UserCard } from '../userCard'
 
 const navigation = [
   { name: 'Acerca de ', href: '/about' },
@@ -78,7 +78,7 @@ export default function Nav() {
                 />
               </PopoverTrigger>
               <PopoverContent className='p-1'>
-                <UserTwitterCard
+                <UserCard
                 />
               </PopoverContent>
             </Popover>
