@@ -1,11 +1,7 @@
 'use client'
-import React from 'react'
-import Image from 'next/image'
-import Nav from '@/components/landing/NavBar'
-import Footer from '@/components/landing/Footer'
 import Link from 'next/link'
 import { Button } from '@nextui-org/react'
-import useWallet from '@/hooks/useWallet'
+import { useWallet } from '@/hooks'
 
 const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault()
@@ -13,7 +9,7 @@ const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   // axios.post('/api/user' ...)
 }
 
-export default function Example () {
+export default function () {
   const { openWalletModal } = useWallet()
 
   return (

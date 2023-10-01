@@ -1,12 +1,9 @@
-import Image from 'next/image'
-import Hero from '../components/landing/Hero'
+import Hero from '@/components/landing/Hero'
 import CustomCard from '../components/landing/Card'
 import Faq from '@/components/landing/Faq'
-import Nav from '@/components/landing/NavBar'
-import Footer from '@/components/landing/Footer'
 import Aliadxs from '@/components/landing/Aliadxs'
 
-export default function Home () {
+export default function Home() {
   return (
     <main className='min-h-screen w-full flex flex-col gap-10 justify-center items-center'>
       <Hero />

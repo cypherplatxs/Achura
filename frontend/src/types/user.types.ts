@@ -1,20 +1,28 @@
-export type FounderUser = {
-  //TODO: Add template literals to walletName
-  userType: 'founder'
-  walletName: string
-  address: `0x${string}`
-  accountName: `${string}.near`
-}
-export type OrganizationUser = {
-  //TODO: Add template literals to walletName
-  walletName: string
-  userType: 'organization'
-  address: `0x${string}`
-  accountName: `${string}.near`
-  taxRegistrationNumber: number
-  country: string
-  legalRepresentative: string
-  orgName: string
-  orgDescription: string
+enum UserType {
+  sponsor = 'sponsor',
+  organization = 'organization',
 }
 
+type Representative = {
+  representativeName: string,
+  representativeIdentificationNumber: number,
+  representativeEmail: string,
+}
+
+type LegalEntity = {
+  legalEntityName: string,
+  legalDescription: number,
+  legalEntityEmail: string,
+  legalEntityAddress: string,
+  legalEntityTaxRegistrationNumber: number,
+  legalEntityCountry: string,
+}
+
+type Wallet = {
+  accountId: string,
+  publicKey: string
+}
+
+export type User = Wallet & Representative & LegalEntity & {
+  type: UserType
+}
