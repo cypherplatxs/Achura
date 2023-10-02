@@ -13,10 +13,11 @@ import BalancePanelSkeleton from '@/components/dashboard/skeleton/BalancePanelSk
 import OrgListPanelSkeleton from '@/components/dashboard/skeleton/OrgListPanelSkeleton'
 import WithdrawPanelSkeleton from '@/components/dashboard/skeleton/WithdrawPanelSkeleton'
 import TxnPanelSkeleton from '@/components/dashboard/skeleton/TxnPanelSkeleton'
-import { useWallet, useBalance } from '@/hooks'
+import { useWallet, useBalance, useGetUser } from '@/hooks'
 
 import { useWalletSelector } from '@/context/wallectSelectorContext'
-import { Organization, Txn, UserType } from '@/types/index.types'
+import { Organization, Txn } from '@/types/index.types'
+import { User as UserType } from '@/types'
 
 enum fetchState {
   loading = 'LOADING',
@@ -24,24 +25,20 @@ enum fetchState {
   success = 'SUCCESS'
 }
 
-type DashboardData = {
-  user: UserType
-  userRole: 'Founder' | 'Organization'
-}
 
 function Page() {
   const { accountId } = useWallet()
 
   const address = useContext(WalletContext)
-  const [data, setData] = useState<DashboardData | null>(null)
   const [state, setState] = useState<fetchState>(fetchState.loading)
 
   const [balance, setBalance] = useState<string | null>(null)
   const { getBalance } = useBalance()
+  const { getUser } = useGetUser()
 
   const [txHistory, setTxHistory] = useState<Txn[] | null>(null)
   const [orgs, setOrgs] = useState<Organization[] | null>(null)
-  const [user, setUser] = useState<any | null>(null)
+  const [user, setUser] = useState<UserType | null>(null)
 
 
 
@@ -50,6 +47,10 @@ function Page() {
       getBalance(accountId).then((raw_balance) => {
         const pasrsed_balance = parseFloat(raw_balance) / (10 ** 24)
         setBalance(pasrsed_balance.toFixed(2))
+      })
+
+      getUser(accountId).then((user) => {
+        setUser(user)
       })
     }
 
@@ -65,17 +66,12 @@ function Page() {
       setOrgs(res.data.orgs)
     })
 
-    // axios.get('/api/user', {
-    //   headers: {
-    //     Address: address
-    //   }
-    // }).then((res) => {
-    //   setUser(res.data.user)
-    // })
-
   }, [])
 
-  // fix user service
+  const getUserButton = () => {
+    return (user && user.type === 'sponsor') ? <FundPanel /> : <WithdrawPanel />
+  }
+  // fix user servic
 
   useEffect(() => {
     console.debug('address')
@@ -83,30 +79,31 @@ function Page() {
   return (
     <main className='min-h-screen'>
       <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
-        <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
-          {
-            user ?
+        {
+          user ?
+            <>
               <User
                 className='user flex justify-start'
-                name={"username"}
-                description={data?.user.role as string}
+                name={user.legalEntityName}
+                description={user.type}
                 avatarProps={{
                   src: 'https://i.pravatar.cc'
                 }}
               />
-              // {user.userRole === 'Founder' ? <FundPanel /> : <WithdrawPanel />}
-              :
-              <div className='max-w-[300px] w-full flex items-center gap-3'>
-                <div>
-                  <Skeleton className='flex rounded-full w-12 h-12' />
-                </div>
-                <div className='w-full flex flex-col gap-2'>
-                  <Skeleton className='h-3 w-3/5 rounded-lg' />
-                  <Skeleton className='h-3 w-4/5 rounded-lg' />
-                </div>
+              {getUserButton()}
+            </>
+            :
+            <div className='max-w-[300px] w-full flex items-center gap-3'>
+              <div>
+                <Skeleton className='flex rounded-full w-12 h-12' />
               </div>
-          }
-        </div>
+              <div className='w-full flex flex-col gap-2'>
+                <Skeleton className='h-3 w-3/5 rounded-lg' />
+                <Skeleton className='h-3 w-4/5 rounded-lg' />
+              </div>
+              <WithdrawPanelSkeleton />
+            </div>
+        }
         {
           balance ?
             <BalancePanel balance={balance} />
@@ -129,7 +126,6 @@ function Page() {
       {state === fetchState.loading && (
         <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
 
-          <WithdrawPanelSkeleton />
         </div>
       )}
       {state === fetchState.error && <p>Something went wrong</p>}

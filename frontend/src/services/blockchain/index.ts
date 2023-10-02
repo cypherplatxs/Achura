@@ -21,5 +21,4 @@ export const getBalance = async (accountId: string) => {
         console.log(location, error);
         throw new Error(`error @ ${location}`);
     }
-
 }

@@ -7,8 +7,6 @@ export function useBalance() {
 
     const getBalance = async (accountId: string) => {
         try {
-            console.log({ accountId });
-
             const res = await blockchain.getBalance(accountId)
             setData(res.balance)
             return res.balance

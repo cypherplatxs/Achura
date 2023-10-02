@@ -39,16 +39,8 @@ export async function addData(collection: string, id: string, data: any) {
 //     return { result, error };
 // }
 export async function geItem(collection: string, id: string,) {
-    let docRef = doc(db, collection, id);
+    let res = await getDoc(doc(db, collection, id))
+    console.log(id);
 
-    let result = null;
-    let error = null;
-
-    try {
-        result = await getDoc(docRef);
-    } catch (e) {
-        error = e;
-    }
-
-    return { result, error };
+    return res.data()
 }
