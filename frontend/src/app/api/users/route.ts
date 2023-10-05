@@ -11,7 +11,7 @@ export async function GET () {
 
   try {
     const res = await firebase.geItem('users', 'accountId')
-    console.log(res)
+    console.log({ res })
     if (
       typeof res?.users === 'undefined' ||
       typeof res?.accountId === 'undefined'
@@ -22,8 +22,15 @@ export async function GET () {
     return NextResponse.json({
       headersList
     })
-  } catch (error) {
+  } catch (error: any) {
     console.log(error)
-    return NextResponse.error()
+    return NextResponse.json(
+      {
+        error: {
+          message: error.message
+        }
+      },
+      { status: 401 }
+    )
   }
 }
