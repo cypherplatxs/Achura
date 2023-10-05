@@ -5,30 +5,30 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { useWalletSelector } from './wallectSelectorContext'
 import { redirect, usePathname } from 'next/navigation'
 
-export const UserContext = createContext<boolean | null>(null)
+export const UserContext = createContext<any | null>(null)
 
 function UserContextProvider ({ children }: { children: React.ReactNode }) {
-  const [userLoged, setUserLoged] = useState(false)
   const { accountId } = useWalletSelector()
   const { getUser, data, error } = useGetUser()
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const path = usePathname()
   useEffect(() => {
-    getUser(accountId as string)
+    const fetchData = async () => {
+      await getUser(accountId as string)
+      setIsLoaded(prev => !prev)
+    }
+    fetchData()
   }, [accountId])
 
-  useEffect(() => {
-    if (data) setUserLoged(true)
-    else setUserLoged(false)
-  }, [data])
   console.debug(data, error)
 
   useEffect(() => {
-    if (path === '/dashboard' && !data) redirect('/auth')
+    if (path === '/dashboard' && !data && isLoaded) {
+      redirect('/auth')
+    }
   }, [path])
 
-  return (
-    <UserContext.Provider value={userLoged}>{children}</UserContext.Provider>
-  )
+  return <UserContext.Provider value={data}>{children}</UserContext.Provider>
 }
 
 export default UserContextProvider

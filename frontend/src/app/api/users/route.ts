@@ -10,20 +10,13 @@ export async function GET () {
   }
 
   try {
-    const res = await firebase.geItem('users', 'accountId')
-    console.log({ res })
-    if (
-      typeof res?.users === 'undefined' ||
-      typeof res?.accountId === 'undefined'
-    ) {
-      throw new Error('user not found')
-    }
+    const response = await firebase.geItem('users', accountId)
 
     return NextResponse.json({
-      headersList
+      data: response
     })
   } catch (error: any) {
-    console.log(error)
+    // console.log(error.message)
     return NextResponse.json(
       {
         error: {
