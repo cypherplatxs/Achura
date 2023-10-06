@@ -6,6 +6,7 @@ authors = ["Cypherplatxs"]
 
 [dependencies]
 near-sdk = "4.1.1"
+schemars = "0.8.15"
 
 [lib]
 path = "lib.rs"
