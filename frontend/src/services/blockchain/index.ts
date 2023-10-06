@@ -1,6 +1,13 @@
 import { config } from "@/services";
-
 import axios from "axios";
+export const getTxsHistory = async (accountId:string) => {
+  const response = await axios.get(`${config.API_BASE_URL}/blockchain/history`,{
+    headers:{
+        accountId
+    }
+  });
+  return response.data;
+};
 
 export const getBalance = async (accountId: string) => {
     try {

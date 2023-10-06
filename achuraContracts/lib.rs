@@ -12,7 +12,7 @@ pub struct Transaction {
   timestamp: Timestamp,
   amount: u128,
   beneficiary: AccountId,
-  // transaction_ix: i64
+  // transaction_id: i64
 }
 
 // Definición de la estructura para el rastreo de transacciones

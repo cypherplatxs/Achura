@@ -36,7 +36,7 @@ function Page() {
   const { getBalance } = useBalance()
   const { getUser } = useGetUser()
 
-  const [txHistory, setTxHistory] = useState<Txn[] | null>(null)
+  const [txHistory, useTxsHistory] = useState<Txn[] | null>(null)
   const [orgs, setOrgs] = useState<Organization[] | null>(null)
   const [user, setUser] = useState<UserType | null>(null)
 
