@@ -1,125 +1,88 @@
+use near_sdk::{env, near_bindgen, AccountId, Balance, Promise, Timestamp};
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::{env, near_bindgen, AccountId, Balance, Timestamp, Promise};
-use near_sdk::serde::{Serialize, Deserialize};
-use near_sdk::collections::TreeMap;
+use near_sdk::collections::LookupMap;
+use near_sdk::serde::Serialize;
 use schemars::JsonSchema;
-use std::vec::Vec;
+// use schemars::JsonSchema;
 
-// Definición de la estructura de datos para rastrear depósitos y retiros
+// #[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone, JsonSchema)]
+
+// Definición de la estructura de datos para rastrear transacciones
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone, JsonSchema)]
+#[derive(BorshDeserialize, BorshSerialize, Serialize, JsonSchema)]
 #[serde(crate = "near_sdk::serde")]
 pub struct Transaction {
-  sender: AccountId,
-  balance: Balance,
-  timestamp: Timestamp,
-  amount: u128,
-  beneficiary: AccountId,
-  // transaction_id: i64
+    sender: AccountId,
+    beneficiary: AccountId,
+    amount: u64,
+	timestamp: Timestamp,
+	balance: Balance
 }
 
+// #[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone)]
+// #[derive(Default)]
+// #[serde(crate = "near_sdk::serde")]
 // Definición de la estructura para el rastreo de transacciones
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone)]
-#[derive(Default)]
-#[serde(crate = "near_sdk::serde")]
+#[derive(BorshDeserialize, BorshSerialize)]
 pub struct Transactions {
-    beneficiary_transactions: TreeMap<AccountId, Vec<Transaction>>,
+    transactions: LookupMap<AccountId, Vec<Transaction>>,
 }
 
-// Función para definir el estado inicial del contrato
-impl Default for Transaction {
-    fn default() -> Self {
-      Self {
-        sender: env::current_account_id(),
-        balance: env::account_balance(),
-        timestamp: env::block_timestamp(),
-        amount: Default::default(),
-        beneficiary: "v1.faucet.nonofficial.testnet".parse().unwrap()
-      }
-    }
-  }
-
-// #[near_bindgen]
-// impl Transaction {
-//     // Función para realizar una transferencia
-//     #[payable]
-//     pub fn transferal(&mut self, account_beneficiary: AccountId, amount_to_send: u128) {
-//         self.sender = env::predecessor_account_id();
-//         self.beneficiary = account_beneficiary;
-//         self.amount = amount_to_send;
-
-//         // Se crea una instancia de la estructura "Transaction"
-//         let transaction = Transaction {
-//             sender: self.sender.clone(),
-//             balance: self.balance,
-//             timestamp: self.timestamp,
-//             amount: self.amount,
-//             beneficiary: self.beneficiary.clone()
-//         };
-
-//         // Se crea una instancia de la estructura "Transactions"
-//         let mut transactions = Transactions {
-//             transactions: Vec::new(),
-//         };
-
-//         // Se agrega la instancia de "transaction"
-//         transactions.transactions.push(transaction);
-//     }
-
-//     // Función para realizar un retiro
-//     #[payable]
-//     pub fn withdraw(&mut self) -> Promise {
-//         let attached_amount = env::attached_deposit();
-//         let sender = env::predecessor_account_id();
-
-//         // let callback_id: AccountId = sender.clone();
-//         // let method_name = "on_withdraw_done".to_string();
-//         // let input: Vec<u8> = vec![];
-//         // let gas: Gas = near_sdk::Gas(30_000_000_000);
-//         // let attached_near: Gas = near_sdk::Gas(30_000_000_000);
-
-//         // let callback: Promise = env::promise_create(
-//         //     callback_id, &method_name, &input, attached_amount, gas);
-
-//         Promise::new(sender).transfer(attached_amount)
-//     }
-// }
-
-#[near_bindgen]
-impl Transaction {
-    // Función para realizar una transferencia
-    #[payable]
-    pub fn transferal(&mut self, account_beneficiary: AccountId, amount_to_send: u128) {
-      self.sender = env::predecessor_account_id();
-      self.beneficiary = account_beneficiary;
-      self.amount = amount_to_send;
-
-        // Agregar la transacción al beneficiario
-        let transaction = Transaction {
-            sender: self.sender.clone(),
-            balance: self.balance,
-            timestamp: self.timestamp,
-            amount: self.amount,
-            beneficiary: account_beneficiary, // Usar el beneficiario proporcionado
-        };
-        let mut transactions = Transactions::default(env::current_account_id());
-        transactions.add_transaction(account_beneficiary, transaction);
-    }
-
-}
+impl Default for Transactions {
+	fn default() -> Self {
+	Self::new()
+	}
+	}
 
 #[near_bindgen]
 impl Transactions {
-    // Función para agregar una transacción al beneficiario
-    pub fn add_transaction(&mut self, beneficiary: AccountId, transaction: Transaction) {
-        let mut beneficiary_transactions = self.beneficiary_transactions.get(&beneficiary).unwrap_or_default();
-        beneficiary_transactions.push(transaction);
-        self.beneficiary_transactions.insert(&beneficiary, &beneficiary_transactions);
+    #[init]
+    pub fn new() -> Self {
+        Self {
+            transactions: LookupMap::new(b"t".to_vec()),
+        }
     }
 
-    // Función para obtener el historial de transacciones de un beneficiario
-    pub fn get_transaction_history(&self, beneficiary: AccountId) -> Vec<Transaction> {
-        self.beneficiary_transactions.get(&beneficiary).unwrap_or_default()
+    // Función para emitir una transferencia
+    #[payable]
+    pub fn transfer(&mut self, beneficiary: AccountId) {
+        let amount: u64 = env::attached_deposit().try_into().unwrap();
+        let sender: AccountId = env::predecessor_account_id();
+		let timestamp: Timestamp = env::block_timestamp();
+		let balance: Balance = env::account_balance();
+		let sender_clone = sender.clone();
+
+        let transaction = Transaction {
+            sender,
+            beneficiary,
+            amount,
+			timestamp,
+			balance
+        };
+
+        let mut sender_transactions = self.transactions.get(&sender_clone).unwrap_or_default();
+        sender_transactions.push(transaction);
+
+        self.transactions.insert(&sender_clone, &sender_transactions);
+    }
+
+    // Función para realizar un retiro si eres el beneficiario
+    pub fn withdraw(&mut self) -> Promise {
+        let sender = env::predecessor_account_id();
+        let sender_transactions = self.transactions.get(&sender).unwrap_or_default();
+
+		let total_amount: Balance = sender_transactions.iter().map(|t| Into::<Balance>::into(t.amount)).sum();
+        if total_amount > 0 {
+            self.transactions.remove(&sender);
+            Promise::new(sender.clone()).transfer(total_amount)
+        } else {
+            env::panic_str("No funds to withdraw.");
+        }
+    }
+
+    // Función para obtener todas las transacciones de una cuenta ID
+    pub fn get_transaction_history(&self, account_id: AccountId) -> Vec<Transaction> {
+        self.transactions.get(&account_id).unwrap_or_default()
     }
 }
