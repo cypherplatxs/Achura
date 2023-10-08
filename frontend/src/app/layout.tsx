@@ -9,11 +9,10 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Achura',
-  //TODO: Add description
-  description: 'This is a creative description.'
+  description: 'Empowering local communities'
 }
 
-export default function RootLayout ({
+export default function RootLayout({
   children
 }: {
   children: React.ReactNode

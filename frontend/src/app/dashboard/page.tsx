@@ -25,7 +25,7 @@ enum fetchState {
   success = 'SUCCESS'
 }
 
-function Page () {
+function Page() {
   const { accountId } = useWallet()
 
   const address = useContext(WalletContext)
@@ -69,11 +69,7 @@ function Page () {
   const getUserButton = () => {
     return user && user.type === 'sponsor' ? <FundPanel /> : <WithdrawPanel />
   }
-  // fix user servic
 
-  useEffect(() => {
-    console.debug('address')
-  }, [address])
   return (
     <main className='min-h-screen'>
       <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>

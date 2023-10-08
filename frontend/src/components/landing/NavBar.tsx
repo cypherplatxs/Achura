@@ -84,11 +84,11 @@ export default function Nav() {
             </Popover>
           </NavbarItem>
         ) : (
-            <NavbarItem>
-              <Button as={Link} color='primary' href='/auth' variant='flat'>
-                Sign up
-              </Button>
-            </NavbarItem>
+          <NavbarItem>
+            <Button as={Link} color='primary' href='/auth' variant='flat'>
+              Launch App
+            </Button>
+          </NavbarItem>
         )}
       </NavbarContent>
       <NavbarMenu>

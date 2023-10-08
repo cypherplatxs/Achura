@@ -16,16 +16,15 @@ import {
   useDisclosure
 } from '@nextui-org/react'
 import { useWallet, useSignUp } from '@/hooks'
-import defaultUser from './default-user.json'
 import { User } from '@/types'
 import { UserContext } from '@/context/userContext'
 
-export default function Page () {
+export default function Page() {
   const [role, setRole] = useState<string>()
   const { handleSignUp, error } = useSignUp()
   const [isLoading, setIsLoading] = useState(false)
   const { openWalletModal, accountId, disconnectWallet, accounts } = useWallet()
-  const userIsLoged = useContext(UserContext)
+  const userIsLogged = useContext(UserContext)
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
@@ -49,7 +48,7 @@ export default function Page () {
     setIsLoading(false)
   }
 
-  console.debug({userIsLoged})
+  console.debug('userIsLogged', userIsLogged)
   return (
     <main className='min-h-screen w-screen relative'>
       <div
@@ -72,7 +71,7 @@ export default function Page () {
         >
           <p className='text-center text-8xl animate-pulse'> 🦙</p>
           <h2 className='text-center font-bold text-4xl'>Join to Achura</h2>
-          {!userIsLoged && accountId && (
+          {!userIsLogged && accountId && (
             <>
               <div className='grid lg:grid-cols-2 gap-5'>
                 <Select
@@ -165,7 +164,7 @@ export default function Page () {
           )}
           {error && <p className='text-center'>{error}</p>}
           {isLoading && <p className='text-center'>Loading...</p>}
-          {accountId && !userIsLoged ? (
+          {accountId && !userIsLogged ? (
             <Button
               isDisabled={isLoading || !role}
               color='primary'
