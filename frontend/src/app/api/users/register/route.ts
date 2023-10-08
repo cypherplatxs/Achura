@@ -5,8 +5,6 @@ import { User } from "@/types";
 export async function POST(request: NextRequest) {
     try {
         const data: User = await request.json()
-        console.log(data);
-
 
         // verify wallet id is new
 
@@ -27,10 +25,10 @@ export async function POST(request: NextRequest) {
 
         // return success message
 
-        return NextResponse.json({ data: "success" }, {status:201})
+        return NextResponse.json({ data: "success" }, { status: 201 })
     } catch (error) {
         console.log(error)
-        return NextResponse.json({ error: "internal error" }, {status: 500})
+        return NextResponse.json({ error: "internal error" }, { status: 500 })
     }
 }
 

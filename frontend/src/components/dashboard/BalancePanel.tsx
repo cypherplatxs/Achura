@@ -1,4 +1,3 @@
-import { CurrencyDollarIcon } from '@heroicons/react/24/outline'
 import { Card, CardBody, CardHeader, Chip, Divider } from '@nextui-org/react'
 import React from 'react'
 

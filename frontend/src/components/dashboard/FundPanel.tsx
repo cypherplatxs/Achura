@@ -20,7 +20,6 @@ function FundPanel() {
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.debug('Funding!');
     onClose();
   };
 
@@ -28,28 +27,28 @@ function FundPanel() {
     <>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
-              <ModalHeader className='text-black flex flex-col gap-1'>
-                Fund panel
-              </ModalHeader>
-              <form onSubmit={handleOnSubmit}>
-              <ModalBody>
-                  <Input
-                    className='text-black'
-                    isRequired
-                    type='number'
-                    label='Amount'
-                    placeholder='Amount in USD'
-                  />
-              </ModalBody>
-              <ModalFooter>
-                <Button color='danger' variant='light' onPress={onClose}>
-                  Close
-                </Button>
-                <Button color='primary' type='submit' >
-                  Fund!
-                </Button>
-              </ModalFooter>
-              </form>
+          <ModalHeader className='text-black flex flex-col gap-1'>
+            Fund panel
+          </ModalHeader>
+          <form onSubmit={handleOnSubmit}>
+            <ModalBody>
+              <Input
+                className='text-black'
+                isRequired
+                type='number'
+                label='Amount'
+                placeholder='Amount in USD'
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button color='danger' variant='light' onPress={onClose}>
+                Close
+              </Button>
+              <Button color='primary' type='submit' >
+                Fund!
+              </Button>
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
       <Card className='with_fund'>

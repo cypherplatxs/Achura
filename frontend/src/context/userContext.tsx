@@ -3,6 +3,7 @@ import { useGetUser } from '@/hooks'
 import { createContext, useEffect, useState } from 'react'
 import { useWalletSelector } from './wallectSelectorContext'
 import { redirect, usePathname } from 'next/navigation'
+import { PATHS } from '@/config'
 
 export const UserContext = createContext<any | null>(null)
 
@@ -20,11 +21,11 @@ function UserContextProvider({ children }: { children: React.ReactNode }) {
   }, [accountId])
 
   useEffect(() => {
-    if (path === '/dashboard' && !userData) {
-      redirect('/auth')
+    if (path === PATHS.DASHBOARD && !userData) {
+      redirect(PATHS.AUTH)
     }
-    if (path === '/auth' && userData) {
-      redirect('/dashboard')
+    if (path === PATHS.AUTH && userData) {
+      redirect(PATHS.DASHBOARD)
     }
   }, [path])
 
