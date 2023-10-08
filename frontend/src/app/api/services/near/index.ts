@@ -1,4 +1,4 @@
-import { keyStores, KeyPair, connect } from "near-api-js"
+import { keyStores, KeyPair, connect, Contract } from "near-api-js"
 
 const keyStore = new keyStores.InMemoryKeyStore();
 
@@ -23,6 +23,31 @@ const connectNear = async () => {
     nearConnection = await connect(connectionConfig)
 }
 
+export const getAccountTransactions = async (accountId: string) => {
+    try {
+        if (!nearConnection) {
+            await connectNear()
+        }
+
+        const account = await nearConnection.account(accountId);
+        const contract = new Contract(
+            account,
+            "juminstock1.testnet",
+            {
+              viewMethods: ["get_transaction_history"],
+            }
+          );
+          const response = await contract.get_transaction_history({
+            account_id: accountId
+          });
+
+          return response;
+    }
+
+    catch (error) {
+    console.log(error);
+    }
+}
 export const getAccountBalance = async (accountId: string) => {
     try {
         if (!nearConnection) {
