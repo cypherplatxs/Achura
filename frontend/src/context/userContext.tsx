@@ -1,34 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useGetUser } from '@/hooks'
-import { WalletContextType } from '@/types/index'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { useWalletSelector } from './wallectSelectorContext'
 import { redirect, usePathname } from 'next/navigation'
 
 export const UserContext = createContext<any | null>(null)
 
-function UserContextProvider ({ children }: { children: React.ReactNode }) {
+function UserContextProvider({ children }: { children: React.ReactNode }) {
   const { accountId } = useWalletSelector()
-  const { getUser, data, error } = useGetUser()
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const { getUser, data: userData, error } = useGetUser()
   const path = usePathname()
   useEffect(() => {
-    const fetchData = async () => {
-      await getUser(accountId as string)
-      setIsLoaded(prev => !prev)
+    if (accountId) {
+      const fetchData = async () => {
+        await getUser(accountId as string)
+      }
+      fetchData()
     }
-    fetchData()
   }, [accountId])
 
-  console.debug(data, error)
-
   useEffect(() => {
-    if (path === '/dashboard' && !data && isLoaded) {
+    if (path === '/dashboard' && !userData) {
       redirect('/auth')
+    }
+    if (path === '/auth' && userData) {
+      redirect('/dashboard')
     }
   }, [path])
 
-  return <UserContext.Provider value={data}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={userData}>{children}</UserContext.Provider>
 }
 
 export default UserContextProvider

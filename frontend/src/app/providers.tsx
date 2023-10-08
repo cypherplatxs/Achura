@@ -5,9 +5,9 @@ import { NextUIProvider } from '@nextui-org/react'
 import { WalletSelectorContextProvider } from '@/context/wallectSelectorContext'
 import UserContextProvider from '@/context/userContext'
 
-function Providers ({ children }: { children: React.ReactNode }) {
-  
-  
+function Providers({ children }: { children: React.ReactNode }) {
+
+  // todo remove value='0x2345'
   return (
     <WalletContext.Provider value='0x2345'>
       <WalletSelectorContextProvider>

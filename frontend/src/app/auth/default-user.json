@@ -12,18 +12,3 @@
     "legalEntityCountry": "CountryABC",
     "type": "sponsor"
 }
-
-{
-    "publicKey": "ed25519:4kLFE8NC4kva5dzXqCvC7vQ5dwPn2fdgQESAs3DHfzG1",
-    "accountId": "another_dev.testnet",
-    "representativeName": "Jonasd",
-    "representativeIdentificationNumber": "123124124",
-    "representativeEmail": "skdksakj@ksafsdka.coas",
-    "legalEntityName": "asdsadasd",
-    "legalDescription": "12312321",
-    "legalEntityEmail": "ksadkas@skakdas.casd",
-    "legalEntityAddress": "asdsadklasjk 12321",
-    "legalEntityTaxRegistrationNumber": "123213213",
-    "legalEntityCountry": "sadsaddas",
-    "type": "organization",
-}

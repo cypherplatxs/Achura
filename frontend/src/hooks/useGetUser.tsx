@@ -9,7 +9,6 @@ export function useGetUser() {
     const getUser = async (accountId: string) => {
         try {
             const res = await users.getUser(accountId)
-            console.debug({accountId, res})
             setData(res)
             return res
         } catch (error) {
