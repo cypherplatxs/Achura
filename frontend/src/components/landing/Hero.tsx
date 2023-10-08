@@ -38,7 +38,7 @@ export default function Example() {
             </p>
             <div className="flex items-center justify-center gap-x-6">
               <Link
-                href="/sign-up"
+                href="/auth"
                 className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Registrate

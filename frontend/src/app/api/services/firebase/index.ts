@@ -25,22 +25,8 @@ export async function addData(collection: string, id: string, data: any) {
     });
 }
 
-// export async function getCollection(collection: string, id: string,) {
-
-//     let result = null;
-//     let error = null;
-
-//     try {
-//         result = await getDocs(collectio(db, id));
-//     } catch (e) {
-//         error = e;
-//     }
-
-//     return { result, error };
-// }
 export async function geItem(collection: string, id: string,) {
     let res = await getDoc(doc(db, collection, id))
     console.log(id);
-
     return res.data()
 }
