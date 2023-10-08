@@ -17,6 +17,7 @@
     "@near-wallet-selector/core": "^8.5.3",
     "@near-wallet-selector/modal-ui": "^8.5.3",
     "@near-wallet-selector/my-near-wallet": "^8.5.3",
+    "@nextui-org/accordion": "^2.0.23",
     "@nextui-org/react": "^2.1.13",
     "axios": "^1.5.1",
     "big.js": "^6.2.1",
