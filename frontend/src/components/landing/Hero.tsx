@@ -1,17 +1,7 @@
 'use client'
-import { useState } from 'react'
-import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
-const navigation = [
-  { name: 'FAQ ', href: '#' },
-  { name: 'Dashboard', href: '/dashboard' },
-  { name: 'Something', href: '#' },
-]
-
-export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
+export default function () {
 
   return (
     <div >
@@ -29,32 +19,28 @@ export default function Example() {
           />
         </div>
         <div className="mx-auto text-center max-w-2xl flex flex-col gap-10 ">
-            <p className='text-8xl animate-pulse'>🦙</p>
-            <h1 className="text-5xl md:text-8xl font-bold tracking-tight">
-             ACHURA
-            </h1>
-            <p className="text-base leading-8 text-withe">
-            Somos un proyecto para potenciar la adoción de criptomonedas y el uso de blockchains por parte de ONGS, Achura que sirve para que las ONG puedan utilizar criptomonedass y recibirlas los activos en divisas que puedan convetir a sus divisas locales
-            </p>
-            <div className="flex items-center justify-center gap-x-6">
-              <Link
-                href="/auth"
-                className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Registrate
-              </Link>
-              <Link target='_blank' href="https://www.mynearwallet.com/"   className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
- >
-                Crea tu wallet
-              </Link>
-            </div>
-            <div className="relative rounded-full px-3 py-5 lg:py-10 text-sm leading-6 text-withe ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Revisa nuestra documentación .{' '}
-              <Link href="https://platohedro.org/" className="font-semibold text-indigo-600">
-                <span className="absolute inset-0 " aria-hidden="true" />
-                Read more <span aria-hidden="true">&rarr;</span>
-              </Link>
-            </div>
+          <p className='text-8xl animate-pulse'>🦙</p>
+          <h1 className="text-5xl md:text-8xl font-bold tracking-tight">
+            ACHURA
+          </h1>
+          <p className="text-base leading-8 text-withe">
+            Achura conecta ONGs al rededor del mundo mediente un servicio de transferencia de recursos por medio de la red NEAR.
+          </p>
+          <div className="flex items-center justify-center gap-x-6">
+            <Link
+              href="/auth"
+              className="rounded-md bg-indigo-600 w-full h-full py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Inicia la app
+            </Link>
+          </div>
+          <div className="relative rounded-full px-3 py-5 lg:py-10 text-sm leading-6 text-withe ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+            Revisa nuestra documentación .
+            <Link href="https://platohedro.org/" className="font-semibold text-indigo-600">
+              <span className="absolute inset-0 " aria-hidden="true" />
+              Read more <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </div>
         </div>
 
 
