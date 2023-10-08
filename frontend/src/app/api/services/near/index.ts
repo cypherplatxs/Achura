@@ -33,6 +33,7 @@ export const getAccountTransactions = async (accountId: string) => {
       changeMethods: [],
       viewMethods: ['get_transaction_history']
     })
+    //@ts-expect-error
     const response = await contract.get_transaction_history({
       account_id: accountId
     })

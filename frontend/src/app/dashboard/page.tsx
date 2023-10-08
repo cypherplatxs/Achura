@@ -16,8 +16,9 @@ import TxnPanelSkeleton from '@/components/dashboard/skeleton/TxnPanelSkeleton'
 import { useWallet, useBalance, useGetUser } from '@/hooks'
 
 import { useWalletSelector } from '@/context/wallectSelectorContext'
-import { Organization, Txn } from '@/types/index.types'
+import { Organization, Txn } from '@/types/index'
 import { User as UserType } from '@/types'
+
 
 enum fetchState {
   loading = 'LOADING',
