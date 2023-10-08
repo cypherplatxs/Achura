@@ -29,12 +29,10 @@ export const getAccountTransactions = async (accountId: string) => {
     }
 
     const account = await nearConnection.account(accountId)
-    console.log({ accountId })
     const contract = new Contract(account, 'juminstock1.testnet', {
       changeMethods: [],
       viewMethods: ['get_transaction_history']
     })
-    console.log({ contract })
     const response = await contract.get_transaction_history({
       account_id: accountId
     })
