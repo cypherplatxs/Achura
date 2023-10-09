@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
-import { getAccountTransactions } from '../../services/near'
 import { headers } from 'next/headers'
-
+import { near } from "@/api-services";
 export async function GET () {
   try {
     const headersList = headers()
@@ -9,12 +8,13 @@ export async function GET () {
     if (!accountId) {
       throw new Error('accountId is not defined')
     }
-    const data = await getAccountTransactions(accountId)
-    console.log({ data }, typeof data)
+    const data = await near.getAccountTransactions(accountId)
+
     return NextResponse.json({
-      data
+      data: true
     }, {status:200})
   } catch (error) {
-    return NextResponse.json({ error }, { status: 401 })
+    // return NextResponse.json({ error }, { status: 401 })
+    console.log(error)
   }
 }

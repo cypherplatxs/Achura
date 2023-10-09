@@ -2,7 +2,11 @@ import { keyStores, KeyPair, connect, Contract } from 'near-api-js'
 
 const keyStore = new keyStores.InMemoryKeyStore()
 
-const keyPair = KeyPair.fromString(process.env.NEAR_KEY ?? 'NO KEY')
+if(!process.env.NEAR_KEY) {
+  throw new Error("Missing near key");
+}
+
+const keyPair = KeyPair.fromString(process.env.NEAR_KEY)
 
 keyStore.setKey('testnet', 'example-account.testnet', keyPair).then(() => {
   console.log('✅ near key was set')
@@ -29,17 +33,30 @@ export const getAccountTransactions = async (accountId: string) => {
     }
 
     const account = await nearConnection.account(accountId)
-    const contract = new Contract(account, 'juminstock1.testnet', {
-      changeMethods: [],
-      viewMethods: ['get_transaction_history']
+    const response = await account.viewFunction({
+      methodName: "get_transaction_history",
+      contractId: "juminstock1.testnet",
+      args: {
+          account_id: accountId
+        }
     })
-    //@ts-expect-error
-    const response = await contract.get_transaction_history({
-      account_id: accountId
-    })
-    console.log({ response })
+    console.log(response)
+    // const contract: any = new Contract(account, 'juminstock1.testnet', {
+    //   changeMethods: [],
+    //   viewMethods: ['get_transaction_history']
+    // })
 
-    return response
+    // const response = await contract.get_transaction_history({
+    //   account_id: accountId
+    // })
+    // console.log({ response })
+
+    // return responsehistory({
+    //   account_id: accountId
+    // })
+    // console.log({ response })
+
+    // return response
   } catch (error) {
     console.log(error)
   }
