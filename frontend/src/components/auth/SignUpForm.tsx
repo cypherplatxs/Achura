@@ -78,6 +78,8 @@ export function SignUpForm({ handleOnSubmit }: SignUpFormProps) {
                     placeholder='john.doe@example.com'
                     name='representativeEmail'
                 />
+                <h3 className='col-span-2 w-full text-center text-2xl ' >Legal Entity info</h3>
+                <Divider className='col-span-2' />
                 <Input
                     // isRequired
                     inputMode='text'
@@ -124,7 +126,7 @@ export function SignUpForm({ handleOnSubmit }: SignUpFormProps) {
                     className='lg:col-span-2'
                     // isRequired
                     inputMode='text'
-                    label='Description'
+                    label='Account description'
                     placeholder='Some description'
                 />
             </div>
