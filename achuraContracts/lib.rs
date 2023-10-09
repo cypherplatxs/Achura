@@ -46,8 +46,8 @@ impl Transactions {
 
     // Función para emitir una transferencia
     #[payable]
-    pub fn transfer(&mut self, beneficiary: AccountId) {
-        let amount: u64 = env::attached_deposit().try_into().unwrap();
+    pub fn transfer(&mut self, beneficiary: AccountId, amount_to_send: u64) {
+        let amount: u64 = amount_to_send;
         let sender: AccountId = env::predecessor_account_id();
 		let timestamp: Timestamp = env::block_timestamp();
 		let balance: Balance = env::account_balance();
