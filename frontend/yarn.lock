@@ -700,6 +700,28 @@
     "@react-types/accordion" "3.0.0-alpha.16"
     "@react-types/shared" "^3.20.0"
 
+"@nextui-org/accordion@^2.0.23":
+  version "2.0.23"
+  resolved "https://registry.yarnpkg.com/@nextui-org/accordion/-/accordion-2.0.23.tgz#e0b6916651cf26c9a89a2c72d967092d43a5a681"
+  integrity sha512-P8TEo79eSMh56VudWF0SvAV8ISC5Qwlx4v03SP3w+Chubl9nrbFbEWyAizOc7KR3ge+VOaS88wyjiZ5BzpG1XQ==
+  dependencies:
+    "@nextui-org/aria-utils" "2.0.10"
+    "@nextui-org/divider" "2.0.20"
+    "@nextui-org/framer-transitions" "2.0.10"
+    "@nextui-org/react-utils" "2.0.9"
+    "@nextui-org/shared-icons" "2.0.4"
+    "@nextui-org/shared-utils" "2.0.3"
+    "@nextui-org/system" "2.0.10"
+    "@nextui-org/theme" "2.1.9"
+    "@nextui-org/use-aria-accordion" "2.0.1"
+    "@react-aria/button" "^3.8.2"
+    "@react-aria/focus" "^3.14.1"
+    "@react-aria/interactions" "^3.18.0"
+    "@react-aria/utils" "^3.20.0"
+    "@react-stately/tree" "^3.7.2"
+    "@react-types/accordion" "3.0.0-alpha.16"
+    "@react-types/shared" "^3.20.0"
+
 "@nextui-org/aria-utils@2.0.10":
   version "2.0.10"
   resolved "https://registry.npmjs.org/@nextui-org/aria-utils/-/aria-utils-2.0.10.tgz"
