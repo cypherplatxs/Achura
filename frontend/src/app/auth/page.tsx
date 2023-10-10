@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Button,
   Modal,
@@ -15,7 +15,7 @@ import { SignUpForm } from '@/components'
 import { PATHS } from '@/config'
 import { useRouter } from 'next/navigation'
 
-export default function Page() {
+export default function Page () {
   const { handleSignUp, error } = useSignUp()
   const [isLoading, setIsLoading] = useState(false)
   const { openWalletModal, accountId, accounts } = useWallet()
@@ -23,7 +23,6 @@ export default function Page() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   const handleOnSubmit = async (data: User) => {
-
     if (accountId) {
       data.accountId = accountId
     }
@@ -32,6 +31,7 @@ export default function Page() {
     }
 
     setIsLoading(true)
+    console.debug({ data })
     const response = await handleSignUp(data)
     setIsLoading(false)
 
@@ -39,6 +39,10 @@ export default function Page() {
       router.replace(PATHS.DASHBOARD)
     }
   }
+
+  useEffect(() => {
+    if (error) onOpen
+  }, [error])
 
   return (
     <main className='min-h-screen w-screen relative'>
@@ -59,28 +63,26 @@ export default function Page() {
         <p className='text-center text-8xl animate-pulse'> 🦙</p>
         <h2 className='text-center font-bold text-4xl'>Join to Achura</h2>
         {accountId ? (
-          <SignUpForm handleOnSubmit={handleOnSubmit} />
+          <SignUpForm isLoading={isLoading} handleOnSubmit={handleOnSubmit} />
         ) : (
           <Button onPress={openWalletModal} color='primary'>
             Connect your wallet
           </Button>
         )}
-        {error && <p className='text-center'>{error}</p>}
-        {isLoading && <p className='text-center'>Loading...</p>}
       </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {onClose => (
             <>
               <ModalHeader className='flex flex-col gap-1'>
-                Remember
+                Error
               </ModalHeader>
               <ModalBody>
-                <p>You must connect your wallet to sign-up in the DApp</p>
+                <p>{error}</p>
               </ModalBody>
               <ModalFooter>
                 <Button color='primary' onPress={onClose}>
-                  Sure!
+                  Ok!
                 </Button>
               </ModalFooter>
             </>

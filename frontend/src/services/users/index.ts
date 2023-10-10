@@ -4,16 +4,6 @@ import axios from 'axios'
 
 export const register = async (data: User) => {
   try {
-    if (typeof data.legalDescription === 'string')
-      data.legalDescription = parseInt(data.legalDescription)
-    if (typeof data.representativeIdentificationNumber === 'string')
-      data.representativeIdentificationNumber = parseInt(
-        data.representativeIdentificationNumber
-      )
-    if (typeof data.legalEntityTaxRegistrationNumber === 'string')
-      data.legalEntityTaxRegistrationNumber = parseInt(
-        data.legalEntityTaxRegistrationNumber
-      )
     const response = await axios.post(`${config.API_BASE_URL}/users/register`, {
       ...data
     })

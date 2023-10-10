@@ -1,140 +1,207 @@
-import { User, UserType } from '@/types';
+import { User, UserType } from '@/types'
 import {
-    Divider,
-    Input,
-    Select,
-    SelectItem,
-    Textarea,
-    Button,
-} from '@nextui-org/react';
+  Divider,
+  Input,
+  Select,
+  SelectItem,
+  Textarea,
+  Button
+} from '@nextui-org/react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver, } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 type SignUpFormProps = {
-    handleOnSubmit: any
+  handleOnSubmit: any
+  isLoading: boolean
 }
 
-export function SignUpForm({ handleOnSubmit }: SignUpFormProps) {
+interface UserYup extends yup.InferType<typeof schema> {}
 
-    const _handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+const schema = yup.object({
+  type: yup.string().oneOf(['sponsor', 'organization']),
+  representativeName: yup.string().required(),
+  representativeIdentificationNumber: yup
+    .number()
+    .positive()
+    .integer()
+    .required(),
+  representativeEmail: yup.string().required(),
+  legalEntityName: yup.string().required(),
+  legalDescription: yup.number().positive().integer().required(),
+  legalEntityEmail: yup.string().email().required(),
+  legalEntityAddress: yup.string().max(20).required(),
+  legalEntityTaxRegistrationNumber: yup
+    .number()
+    .positive()
+    .integer()
+    .required(),
+  legalEntityCountry: yup.string().required(),
+  accountDescription: yup.string().nullable()
+})
 
-        // todo construct the userData object from the form data and catch nulls
-        // user react form hooks to get the form data
-        const userData: User = {
-            publicKey: "",
-            accountId: "",
-            representativeName: "John Doe",
-            representativeIdentificationNumber: 123456,
-            representativeEmail: "john.doe@example.com",
-            legalEntityName: "XYZ Company",
-            legalDescription: 789012345,
-            legalEntityEmail: "info@xyzcompany.com",
-            legalEntityAddress: "1234 Elm St, City, Country",
-            legalEntityTaxRegistrationNumber: 987654321,
-            legalEntityCountry: "CountryABC",
-            type: UserType.sponsor,
-        };
+export function SignUpForm ({ handleOnSubmit, isLoading }: SignUpFormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(schema)
+  })
 
-        handleOnSubmit(userData);
 
-    }
+  const _handleOnSubmit = async (userData: UserYup) => {
+    console.debug(userData)
+    // todo construct the userData object from the form data and catch nulls
+    // user react form hooks to get the form data
 
-    return (
-        <form
-            onSubmit={_handleOnSubmit}
-            className='px-5 lg:px-0 lg:w-1/2 flex flex-col gap-5'
+    handleOnSubmit(userData)
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit(_handleOnSubmit)}
+      className='px-5 lg:px-0 lg:w-1/2 flex flex-col gap-5'
+    >
+      <div className='grid lg:grid-cols-2 gap-5'>
+        <Select
+          {...register('type', { required: true })}
+          isInvalid={errors.type && true}
+          errorMessage={errors.type && 'Please select a Role'}
+          name='type'
+          label='Select your role'
         >
-            <div className='grid lg:grid-cols-2 gap-5'>
-                <Select
-                    // isRequired
-                    name='type'
-                    label='Select your role'
-                >
-                    <SelectItem key='sponsor' value='sponsor'>
-                        Founder
-                    </SelectItem>
-                    <SelectItem key='organization' value='organization'>
-                        Organization
-                    </SelectItem>
-                </Select>
-                <Input
-                    // isRequired
-                    inputMode='text'
-                    label='Representative name'
-                    placeholder='John Doe'
-                    name='representativeName'
-                />
-                <Input
-                    // isRequired
-                    inputMode='numeric'
-                    label='ID number'
-                    type='number'
-                    placeholder='922991...'
-                    name='representativeIdentificationNumber'
-                />
-                <Input
-                    // isRequired
-                    inputMode='email'
-                    label='Email'
-                    placeholder='john.doe@example.com'
-                    name='representativeEmail'
-                />
-                <h3 className='col-span-2 w-full text-center text-2xl ' >Legal Entity info</h3>
-                <Divider className='col-span-2' />
-                <Input
-                    // isRequired
-                    inputMode='text'
-                    label='Legal entity name'
-                    placeholder='XYZ Company'
-                    name='legalEntityName'
-                />
-                <Input
-                    // isRequired
-                    inputMode='numeric'
-                    label='Legal description'
-                    placeholder='892702'
-                    name='legalDescription'
-                />
-                <Input
-                    // isRequired
-                    inputMode='email'
-                    label='Legal Entity Email'
-                    placeholder='info@xyzcompany.com'
-                    name='legalEntityEmail'
-                />
-                <Input
-                    // isRequired
-                    inputMode='text'
-                    label='Legal Entity address'
-                    placeholder='1234 Elm St, City, Country'
-                    name='legalEntityAddress'
-                />
-                <Input
-                    // isRequired
-                    inputMode='numeric'
-                    label='Legal Entity tax registration number'
-                    placeholder='89809289'
-                    name='legalEntityTaxRegistrationNumber'
-                />
-                <Input
-                    // isRequired
-                    inputMode='text'
-                    label='Legal Entity country'
-                    placeholder='CountryABC'
-                    name='legalEntityCountry'
-                />
-                <Textarea
-                    className='lg:col-span-2'
-                    // isRequired
-                    inputMode='text'
-                    label='Account description'
-                    placeholder='Some description'
-                />
-            </div>
-            <Divider />
-
-            <Button type='submit' color='primary'>
-                Submit
-            </Button>
-        </form>
-    )
+          <SelectItem key='sponsor' value='sponsor'>
+            Sponsor
+          </SelectItem>
+          <SelectItem key='organization' value='organization'>
+            Organization
+          </SelectItem>
+        </Select>
+        <Input
+          {...register('representativeName', { required: true })}
+          inputMode='text'
+          label='Representative name'
+          placeholder='John Doe'
+          name='representativeName'
+          isInvalid={errors.representativeName && true}
+          errorMessage={
+            errors.representativeName && 'Please enter a valid name'
+          }
+        />
+        <Input
+          {...register('representativeIdentificationNumber', {
+            required: true
+          })}
+          isInvalid={errors.representativeIdentificationNumber && true}
+          errorMessage={
+            errors.representativeIdentificationNumber &&
+            'Please enter a valid ID'
+          }
+          inputMode='numeric'
+          label='ID number'
+          type='number'
+          placeholder='922991...'
+          name='representativeIdentificationNumber'
+        />
+        <Input
+          {...register('representativeEmail', { required: true })}
+          isInvalid={errors.representativeEmail && true}
+          errorMessage={
+            errors.representativeEmail && 'Please enter a valid email'
+          }
+          inputMode='email'
+          label='Email'
+          placeholder='john.doe@example.com'
+          name='representativeEmail'
+        />
+        <h3 className='col-span-2 w-full text-center text-2xl '>
+          Legal Entity info
+        </h3>
+        <Divider className='col-span-2' />
+        <Input
+          {...register('legalEntityName', { required: true })}
+          isInvalid={errors.legalEntityName && true}
+          errorMessage={
+            errors.legalEntityName && 'Please enter a valid legal entity name'
+          }
+          inputMode='text'
+          label='Legal entity name'
+          placeholder='XYZ Company'
+          name='legalEntityName'
+        />
+        <Input
+          {...register('legalDescription', { required: true })}
+          isInvalid={errors.legalDescription && true}
+          errorMessage={
+            errors.legalDescription && 'Please enter a valid legal description'
+          }
+          inputMode='numeric'
+          label='Legal description'
+          type='number'
+          placeholder='892702'
+          name='legalDescription'
+        />
+        <Input
+          {...register('legalEntityEmail', {
+            required: true
+          })}
+          isInvalid={errors.legalEntityEmail && true}
+          errorMessage={errors.legalEntityEmail && 'Please enter a valid email'}
+          inputMode='email'
+          label='Legal Entity Email'
+          placeholder='info@xyzcompany.com'
+          name='legalEntityEmail'
+        />
+        <Input
+          {...register('legalEntityAddress', { required: true })}
+          isInvalid={errors.legalEntityAddress && true}
+          errorMessage={
+            errors.legalEntityAddress && 'Please enter a valid address'
+          }
+          inputMode='text'
+          label='Legal Entity address'
+          placeholder='1234 Elm St, City, Country'
+          name='legalEntityAddress'
+        />
+        <Input
+          {...register('legalEntityTaxRegistrationNumber', {
+            required: true
+          })}
+          isInvalid={errors.legalEntityTaxRegistrationNumber && true}
+          errorMessage={
+            errors.legalEntityTaxRegistrationNumber &&
+            'Please enter a valid Tax registration number'
+          }
+          inputMode='numeric'
+          type='number'
+          label='Legal Entity tax registration number'
+          placeholder='89809289'
+          name='legalEntityTaxRegistrationNumber'
+        />
+        {/* TODO make this a select with an external Api */}
+        <Input
+          {...register('legalEntityCountry', { required: true })}
+          isInvalid={errors.legalEntityCountry && true}
+          errorMessage={
+            errors.legalEntityCountry && 'Please enter a valid country'
+          }
+          inputMode='text'
+          label='Legal Entity country'
+          placeholder='CountryABC'
+          name='legalEntityCountry'
+        />
+        <Textarea
+          className='md:col-span-2'
+          inputMode='text'
+          label='Account description'
+          placeholder='Some description'
+        />
+      </div>
+      <Divider />
+      <Button isLoading={isLoading} type='submit' color='primary'>
+        Submit
+      </Button>
+    </form>
+  )
 }
