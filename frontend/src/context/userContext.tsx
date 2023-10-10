@@ -9,7 +9,7 @@ export const UserContext = createContext<any | null>(null)
 
 function UserContextProvider({ children }: { children: React.ReactNode }) {
   const { accountId } = useWalletSelector()
-  const { getUser, data: userData, error } = useGetUser()
+  const { getUser, data: userData, error , isLoading} = useGetUser()
   const path = usePathname()
   useEffect(() => {
     if (accountId) {
@@ -21,6 +21,7 @@ function UserContextProvider({ children }: { children: React.ReactNode }) {
   }, [accountId])
 
   useEffect(() => {
+    if(isLoading) return
     if (path === PATHS.DASHBOARD && !userData) {
       redirect(PATHS.AUTH)
     }

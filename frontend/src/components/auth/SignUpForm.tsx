@@ -30,7 +30,7 @@ const schema = yup.object({
   legalEntityName: yup.string().required(),
   legalDescription: yup.number().positive().integer().required(),
   legalEntityEmail: yup.string().email().required(),
-  legalEntityAddress: yup.string().max(20).required(),
+  legalEntityAddress: yup.string().max(40).required(),
   legalEntityTaxRegistrationNumber: yup
     .number()
     .positive()
@@ -51,10 +51,6 @@ export function SignUpForm ({ handleOnSubmit, isLoading }: SignUpFormProps) {
 
 
   const _handleOnSubmit = async (userData: UserYup) => {
-    console.debug(userData)
-    // todo construct the userData object from the form data and catch nulls
-    // user react form hooks to get the form data
-
     handleOnSubmit(userData)
   }
 

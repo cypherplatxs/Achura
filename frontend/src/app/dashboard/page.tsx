@@ -47,7 +47,7 @@ function Page() {
       })
 
       getUser(accountId).then(user => {
-        setUser(user)
+        setUser(user.data)
       })
     }
 

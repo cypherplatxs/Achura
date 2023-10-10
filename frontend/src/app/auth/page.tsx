@@ -31,7 +31,6 @@ export default function Page () {
     }
 
     setIsLoading(true)
-    console.debug({ data })
     const response = await handleSignUp(data)
     setIsLoading(false)
 
