@@ -11,10 +11,9 @@ export async function GET () {
     const data = await near.getAccountTransactions(accountId)
 
     return NextResponse.json({
-      data: true
+      data
     }, {status:200})
   } catch (error) {
-    // return NextResponse.json({ error }, { status: 401 })
-    console.log(error)
+    return NextResponse.json({ error }, { status: 401 })
   }
 }

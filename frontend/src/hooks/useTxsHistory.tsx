@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { getTxsHistory } from '../services/blockchain'
+import { useState } from 'react'
 import { Txn } from '@/types'
 import { blockchain } from '@/services'
 
@@ -10,8 +9,7 @@ const useTxsHistory = () => {
   const getTxn = async (accountId: string) => {
     try {
       const res = await blockchain.getTxsHistory(accountId)
-      setData(res)
-      return res
+      setData(res.data)
     } catch (error) {
       setError(JSON.stringify(error))
     }

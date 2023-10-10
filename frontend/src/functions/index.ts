@@ -1,0 +1,1 @@
+export {parseHash} from './parseHash'

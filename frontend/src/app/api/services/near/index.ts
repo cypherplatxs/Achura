@@ -56,7 +56,7 @@ export const getAccountTransactions = async (accountId: string) => {
     // })
     // console.log({ response })
 
-    // return response
+    return response
   } catch (error) {
     console.log(error)
   }
