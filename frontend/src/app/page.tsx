@@ -13,22 +13,22 @@ export default function Home() {
       <div className='flex flex-col gap-5 lg:gap-0 lg:flex-row'>
         <CustomCard
           title='🌾 Mayor Adopción '
-          subtitle='nextui.org'
+          subtitle='Achura.co'
           description='Ayudamos a las mayores ONGs para que crezcan gracias a la tecnología blockchain'
-          githubLink='https://github.com/nextui-org/nextui'
+          githubLink='https://github.com/cypherplatxs/Achura'
         />
 
         <CustomCard
           title='💱 Cripto to fiat '
-          subtitle='nextui.org'
+          subtitle='Achura.co'
           description='Cambia de cripto a tu Fiat local sin salir de ACHURA'
-          githubLink='https://github.com/nextui-org/nextui'
+          githubLink='https://github.com/cypherplatxs/Achura'
         />
         <CustomCard
           title='🦩 Uso simple'
-          subtitle='nextui.org'
+          subtitle='Achura.co'
           description='Solo necesitas tener una wallet de NEAR '
-          githubLink='https://github.com/nextui-org/nextui'
+          githubLink='https://github.com/cypherplatxs/Achura'
         />
       </div>
       <Aliadxs />
