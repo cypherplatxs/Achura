@@ -51,7 +51,7 @@ function Page () {
       getUser(accountId).then(user => {
         setUser(user)
       })
-      getTxn(accountIdx)
+      getTxn(accountId)
     }
 
     axios.get('/api/get-orgs').then(res => {
