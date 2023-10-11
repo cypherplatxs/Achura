@@ -2,11 +2,10 @@ use near_sdk::{env, near_bindgen, AccountId, Balance, Promise, Timestamp};
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::collections::LookupMap;
 use near_sdk::serde::Serialize;
+use near_sdk::env::sha256;
 use schemars::JsonSchema;
-// use schemars::JsonSchema;
 
 // #[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone, JsonSchema)]
-
 // Definición de la estructura de datos para rastrear transacciones
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, Serialize, JsonSchema)]
@@ -16,7 +15,8 @@ pub struct Transaction {
     beneficiary: AccountId,
     amount: u64,
 	timestamp: Timestamp,
-	balance: Balance
+	balance: Balance,
+    hash: Vec<u8>
 }
 
 // #[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone)]
@@ -33,7 +33,7 @@ impl Default for Transactions {
 	fn default() -> Self {
 	Self::new()
 	}
-	}
+}
 
 #[near_bindgen]
 impl Transactions {
@@ -53,12 +53,17 @@ impl Transactions {
 		let balance: Balance = env::account_balance();
 		let sender_clone = sender.clone();
 
+         // Calcula el hash de la transacción
+        let transaction_data = format!("{}{}{}{}{}", sender, beneficiary, amount, timestamp, balance);
+        let transaction_hash = sha256(transaction_data.as_bytes());
+
         let transaction = Transaction {
             sender,
             beneficiary,
             amount,
 			timestamp,
-			balance
+			balance,
+            hash: transaction_hash
         };
 
         let mut sender_transactions = self.transactions.get(&sender_clone).unwrap_or_default();
