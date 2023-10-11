@@ -1,22 +1,29 @@
-import { NextResponse } from "next/server";
-import { headers } from "next/headers";
-import { firebase } from "@/api-services";
+import { NextResponse } from 'next/server'
+import { headers } from 'next/headers'
+import { firebase } from '@/api-services'
 
+export async function GET () {
+  const headersList = headers()
+  const accountId = headersList.get('accountId')
+  if (!accountId) {
+    throw new Error('accountId is not defined')
+  }
 
-export async function GET() {
-    const headersList = headers()
-    const accountId = headersList.get('accountId')
-    if (!accountId) {
-        throw new Error("accountId is not defined");
-    }
-
-    const res = await firebase.geItem(
-        'users',
-        "accountId"
-    )
-    console.log(res);
+  try {
+    const response = await firebase.geItem('users', accountId)
 
     return NextResponse.json({
-        headersList
+      data: response
     })
+  } catch (error: any) {
+    // console.log(error.message)
+    return NextResponse.json(
+      {
+        error: {
+          message: error.message
+        }
+      },
+      { status: 401 }
+    )
+  }
 }

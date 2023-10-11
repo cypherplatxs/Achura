@@ -20,28 +20,19 @@ export default function Aliadxs() {
           <div className="text-center"> {/* Aplica text-center al contenedor de cada imagen */}
             <img
               className="max-h-12 w-full object-contain"
-              src="https://cryptologos.cc/logos/cosmos-atom-logo.svg?v=002"
+              src="https://encodeclub.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fd0c8094a-e610-4814-9977-ce61e347ef5a%2F8eb7cfc7-0d74-47f6-861d-2b02b6af9621%2Fsymbol-1.png?table=block&id=bf7c722c-b847-4945-a333-90447cd9a5ad&spaceId=d0c8094a-e610-4814-9977-ce61e347ef5a&width=600&userId=&cache=v2"
               alt="Reform"
               width={158}
               height={48}
             />
           </div>
+     
           <div className="text-center"> {/* Aplica text-center al contenedor de cada imagen */}
             <img
               className="max-h-12 w-full object-contain"
-              src="https://asset.brandfetch.io/ida1_kkuFW/idgR852F1k.svg"
+              src="https://seeklogo.com/images/M/mintbase-nft-contract-logo-5CC9735092-seeklogo.com.png"
               alt="Reform"
-              width={158}
-              height={48}
-            />
-            
-          </div>
-          <div className="text-center"> {/* Aplica text-center al contenedor de cada imagen */}
-            <img
-              className="max-h-12 w-full object-contain"
-              src="https://cryptologos.cc/logos/zcash-zec-logo.svg?v=002"
-              alt="Reform"
-              width={158}
+              width={458}
               height={48}
             />
             

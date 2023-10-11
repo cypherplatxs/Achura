@@ -25,7 +25,11 @@ enum fetchState {
   success = 'SUCCESS'
 }
 
+<<<<<<< HEAD
 function Page () {
+=======
+function Page() {
+>>>>>>> main
   const { accountId } = useWallet()
 
   const address = useContext(WalletContext)
@@ -39,8 +43,11 @@ function Page () {
   const [orgs, setOrgs] = useState<Organization[] | null>(null)
   const [user, setUser] = useState<UserType | null>(null)
 
+<<<<<<< HEAD
   const { data: txHistory, getTxn } = useTxsHistory()
 
+=======
+>>>>>>> main
   useEffect(() => {
     if (accountId) {
       getBalance(accountId).then(raw_balance => {
@@ -49,11 +56,28 @@ function Page () {
       })
 
       getUser(accountId).then(user => {
+<<<<<<< HEAD
         setUser(user)
+=======
+        setUser(user.data)
+>>>>>>> main
       })
       getTxn(accountId)
     }
 
+<<<<<<< HEAD
+=======
+    axios
+      .get('/api/txn-history', {
+        headers: {
+          Address: address
+        }
+      })
+      .then(res => {
+        setTxHistory(res.data.txnHistory)
+      })
+
+>>>>>>> main
     axios.get('/api/get-orgs').then(res => {
       setOrgs(res.data.orgs)
     })
@@ -63,11 +87,7 @@ function Page () {
   const getUserButton = () => {
     return user && user.type === 'sponsor' ? <FundPanel /> : <WithdrawPanel />
   }
-  // fix user servic
 
-  useEffect(() => {
-    console.debug('address')
-  }, [address])
   return (
     <main className='min-h-screen'>
       <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
@@ -84,6 +104,7 @@ function Page () {
             {getUserButton()}
           </>
         ) : (
+<<<<<<< HEAD
           <div className='max-w-[300px] w-full flex items-center gap-3'>
             <div>
               <Skeleton className='flex rounded-full w-12 h-12' />
@@ -94,13 +115,30 @@ function Page () {
             </div>
             <WithdrawPanelSkeleton />
           </div>
+=======
+          <>
+            <div className='max-w-[300px] w-full flex items-center gap-3'>
+              <div>
+                <Skeleton className='flex rounded-full w-12 h-12' />
+              </div>
+              <div className='w-full flex flex-col gap-2'>
+                <Skeleton className='h-3 w-3/5 rounded-lg' />
+                <Skeleton className='h-3 w-4/5 rounded-lg' />
+              </div>
+            </div>
+            <WithdrawPanelSkeleton />
+          </>
+>>>>>>> main
         )}
         {balance ? (
           <BalancePanel balance={balance} />
         ) : (
           <BalancePanelSkeleton />
         )}
+<<<<<<< HEAD
         {/* TODO: create a component that shows when txHistory is empty */}
+=======
+>>>>>>> main
         {txHistory ? <TxnPanel txns={txHistory} /> : <TxnPanelSkeleton />}
         {orgs ? <OrgListPanel orgs={orgs} /> : <OrgListPanelSkeleton />}
       </div>

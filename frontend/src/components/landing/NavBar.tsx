@@ -84,16 +84,11 @@ export default function Nav() {
             </Popover>
           </NavbarItem>
         ) : (
-          <>
-            <NavbarItem className='hidden lg:flex'>
-              <Link href='/log-in'>Login</Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Button as={Link} color='primary' href='/sign-up' variant='flat'>
-                Sign up
-              </Button>
-            </NavbarItem>
-          </>
+          <NavbarItem>
+            <Button as={Link} color='primary' href='/auth' variant='flat'>
+              Launch App
+            </Button>
+          </NavbarItem>
         )}
       </NavbarContent>
       <NavbarMenu>
@@ -108,7 +103,7 @@ export default function Nav() {
                     : 'foreground'
               }
               className='w-full'
-              href='#'
+              href={item.href}
               size='lg'
             >
               {item.name}

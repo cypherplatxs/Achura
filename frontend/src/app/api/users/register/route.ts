@@ -1,12 +1,10 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { firebase } from "@/api-services";
 import { User } from "@/types";
 
 export async function POST(request: NextRequest) {
     try {
         const data: User = await request.json()
-        console.log(data);
-
 
         // verify wallet id is new
 
@@ -27,9 +25,10 @@ export async function POST(request: NextRequest) {
 
         // return success message
 
-        return Response.json({ data: "success" })
+        return NextResponse.json({ data: "success" }, { status: 201 })
     } catch (error) {
-        return Response.json({ error: "internal error" })
+        console.log(error)
+        return NextResponse.json({ error: "internal error" }, { status: 500 })
     }
 }
 

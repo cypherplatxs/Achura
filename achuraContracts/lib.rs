@@ -1,12 +1,10 @@
-use near_sdk::{env, near_bindgen, AccountId, Balance, Promise, Timestamp};
+use near_sdk::{env, near_bindgen, AccountId, Balance, Promise, Timestamp, CryptoHash};
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::collections::LookupMap;
 use near_sdk::serde::Serialize;
 use schemars::JsonSchema;
-// use schemars::JsonSchema;
 
 // #[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone, JsonSchema)]
-
 // Definición de la estructura de datos para rastrear transacciones
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, Serialize, JsonSchema)]
@@ -33,7 +31,7 @@ impl Default for Transactions {
 	fn default() -> Self {
 	Self::new()
 	}
-	}
+}
 
 #[near_bindgen]
 impl Transactions {
