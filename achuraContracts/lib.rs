@@ -2,10 +2,8 @@ use near_sdk::{env, near_bindgen, AccountId, Balance, Promise, Timestamp};
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::collections::LookupMap;
 use near_sdk::serde::Serialize;
-use near_sdk::env::sha256;
 use schemars::JsonSchema;
 
-// #[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone, JsonSchema)]
 // Definición de la estructura de datos para rastrear transacciones
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, Serialize, JsonSchema)]
@@ -13,15 +11,12 @@ use schemars::JsonSchema;
 pub struct Transaction {
     sender: AccountId,
     beneficiary: AccountId,
-    amount: u64,
+    amount: u128,
 	timestamp: Timestamp,
 	balance: Balance,
-    hash: Vec<u8>
+    // hash: String
 }
 
-// #[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, Clone)]
-// #[derive(Default)]
-// #[serde(crate = "near_sdk::serde")]
 // Definición de la estructura para el rastreo de transacciones
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize)]
@@ -46,24 +41,30 @@ impl Transactions {
 
     // Función para emitir una transferencia
     #[payable]
-    pub fn transfer(&mut self, beneficiary: AccountId, amount_to_send: u64) {
-        let amount: u64 = amount_to_send;
+    pub fn transfer(&mut self, beneficiary_to_send: AccountId, amount_to_send: u128) {
+        let amount: u128 = amount_to_send;
         let sender: AccountId = env::predecessor_account_id();
 		let timestamp: Timestamp = env::block_timestamp();
 		let balance: Balance = env::account_balance();
-		let sender_clone = sender.clone();
+		let sender_clone: AccountId = sender.clone();
+        let beneficiary: AccountId = beneficiary_to_send;
+        let beneficiary_clone: AccountId = beneficiary.clone();
 
-         // Calcula el hash de la transacción
-        let transaction_data = format!("{}{}{}{}{}", sender, beneficiary, amount, timestamp, balance);
-        let transaction_hash = sha256(transaction_data.as_bytes());
+        // Validación: Verificar al sender y los fondos
+        if sender != env::predecessor_account_id() {
+            env::panic_str("Solo el propietario de los fondos puede realizar una transferencia.");
+        } else if balance < amount {
+                env::panic_str("Saldo insuficiente para realizar la transferencia.")
+            } else {
+                    self.transfer(beneficiary, amount)
+                }
 
         let transaction = Transaction {
             sender,
-            beneficiary,
+            beneficiary: beneficiary_clone,
             amount,
 			timestamp,
-			balance,
-            hash: transaction_hash
+			balance
         };
 
         let mut sender_transactions = self.transactions.get(&sender_clone).unwrap_or_default();
@@ -77,12 +78,15 @@ impl Transactions {
         let sender = env::predecessor_account_id();
         let sender_transactions = self.transactions.get(&sender).unwrap_or_default();
 
-		let total_amount: Balance = sender_transactions.iter().map(|t| Into::<Balance>::into(t.amount)).sum();
+        // Calcula el total de los fondos disponibles para retirar
+		let total_amount: Balance = sender_transactions.iter()
+        .map(|t| Into::<Balance>::into(t.amount)).sum();
+
         if total_amount > 0 {
             self.transactions.remove(&sender);
             Promise::new(sender.clone()).transfer(total_amount)
         } else {
-            env::panic_str("No funds to withdraw.");
+            env::panic_str("No hay fondos disponibles para retirar.");
         }
     }
 
