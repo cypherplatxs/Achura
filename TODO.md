@@ -1,5 +1,4 @@
- 
-# Achura todo
+ # Achura todo
 
 - [ ] Pending task
 - [x] Completed task
@@ -10,7 +9,6 @@
 - [ ] Sign up not working
 - [ ] Disconnect button ux: user might disconnect by accident, remove accent color, move button to nav
 
-
 ## Api
 
 - [ ] users service
@@ -19,5 +17,3 @@
 - [ ] blockchain service
 - [ ] api global error handler
 - [ ] api global response object
-
-

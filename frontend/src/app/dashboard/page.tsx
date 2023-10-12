@@ -13,10 +13,10 @@ import BalancePanelSkeleton from '@/components/dashboard/skeleton/BalancePanelSk
 import OrgListPanelSkeleton from '@/components/dashboard/skeleton/OrgListPanelSkeleton'
 import WithdrawPanelSkeleton from '@/components/dashboard/skeleton/WithdrawPanelSkeleton'
 import TxnPanelSkeleton from '@/components/dashboard/skeleton/TxnPanelSkeleton'
-import { useWallet, useBalance, useGetUser } from '@/hooks'
+import { useWallet, useBalance, useGetUser, useTxsHistory } from '@/hooks'
 
 import { useWalletSelector } from '@/context/wallectSelectorContext'
-import { Organization, Txn } from '@/types/index.types'
+import { Organization, Txn } from '@/types/index'
 import { User as UserType } from '@/types'
 
 enum fetchState {
@@ -25,7 +25,9 @@ enum fetchState {
   success = 'SUCCESS'
 }
 
-function Page() {
+
+
+function Page () {
   const { accountId } = useWallet()
 
   const address = useContext(WalletContext)
@@ -35,9 +37,13 @@ function Page() {
   const { getBalance } = useBalance()
   const { getUser } = useGetUser()
 
-  const [txHistory, setTxHistory] = useState<Txn[] | null>(null)
+  // const [txHistory, useTxsHistory] = useState<Txn[] | null>(null)
   const [orgs, setOrgs] = useState<Organization[] | null>(null)
   const [user, setUser] = useState<UserType | null>(null)
+
+
+  const { data: txHistory, getTxn } = useTxsHistory()
+
 
   useEffect(() => {
     if (accountId) {
@@ -48,23 +54,17 @@ function Page() {
 
       getUser(accountId).then(user => {
         setUser(user.data)
+
       })
+      getTxn(accountId)
     }
 
-    axios
-      .get('/api/txn-history', {
-        headers: {
-          Address: address
-        }
-      })
-      .then(res => {
-        setTxHistory(res.data.txnHistory)
-      })
 
     axios.get('/api/get-orgs').then(res => {
       setOrgs(res.data.orgs)
     })
   }, [])
+
 
   const getUserButton = () => {
     return user && user.type === 'sponsor' ? <FundPanel /> : <WithdrawPanel />
@@ -86,6 +86,7 @@ function Page() {
             {getUserButton()}
           </>
         ) : (
+
           <>
             <div className='max-w-[300px] w-full flex items-center gap-3'>
               <div>
@@ -98,12 +99,14 @@ function Page() {
             </div>
             <WithdrawPanelSkeleton />
           </>
+
         )}
         {balance ? (
           <BalancePanel balance={balance} />
         ) : (
           <BalancePanelSkeleton />
         )}
+
         {txHistory ? <TxnPanel txns={txHistory} /> : <TxnPanelSkeleton />}
         {orgs ? <OrgListPanel orgs={orgs} /> : <OrgListPanelSkeleton />}
       </div>
