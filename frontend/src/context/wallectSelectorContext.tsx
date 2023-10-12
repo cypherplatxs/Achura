@@ -39,43 +39,6 @@ export const WalletSelectorContextProvider: React.FC<{
       debug: true,
       modules: [
         setupMyNearWallet(),
-        // setupLedger(),
-        // setupNearWallet(),
-        // setupSender(),
-        // setupMathWallet(),
-        // setupNightly(),
-        // setupMeteorWallet(),
-        // setupNearSnap(),
-        // setupNarwallets(),
-        // setupWelldoneWallet(),
-        // setupHereWallet(),
-        // setupCoin98Wallet(),
-        // setupNearFi(),
-        // setupNeth({
-        //   gas: "300000000000000",
-        //   bundle: false,
-        // }),
-        // setupOptoWallet(),
-        // setupFinerWallet(),
-        // setupXDEFI(),
-        // setupWalletConnect({
-        //   projectId: "c8cb6204543639c31aef44ea4837a554",
-        //   metadata: {
-        //     name: "NEAR Wallet Selector",
-        //     description: "Example dApp used by NEAR Wallet Selector",
-        //     url: "https://github.com/near/wallet-selector",
-        //     icons: ["https://avatars.githubusercontent.com/u/37784886"],
-        //   },
-        // }),
-        // setupNightlyConnect({
-        //   url: "wss://relay.nightly.app/app",
-        //   appMetadata: {
-        //     additionalInfo: "",
-        //     application: "NEAR Wallet Selector",
-        //     description: "Example dApp used by NEAR Wallet Selector",
-        //     icon: "https://near.org/wp-content/uploads/2020/09/cropped-favicon-192x192.png",
-        //   },
-        // }),
       ],
     });
     const _modal = setupModal(_selector, {
@@ -109,8 +72,6 @@ export const WalletSelectorContextProvider: React.FC<{
         distinctUntilChanged()
       )
       .subscribe((nextAccounts) => {
-        console.log("Accounts Update", nextAccounts);
-
         setAccounts(nextAccounts);
       });
 

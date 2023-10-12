@@ -10,6 +10,7 @@ export function useSignUp() {
         try {
             const res = await users.register(data)
             setData(res)
+            return res
         } catch (error) {
             setError(JSON.stringify(error))
         }

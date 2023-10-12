@@ -15,12 +15,11 @@ import {
 } from '@nextui-org/react'
 import React from 'react'
 
-function OrgListPanel ({ orgs }: { orgs: Organization[] }) {
+function OrgListPanel({ orgs }: { orgs: Organization[] }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.debug('Funding!')
     onClose()
   }
   return (

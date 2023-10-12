@@ -32,7 +32,10 @@ export default function Home() {
         />
       </div>
       <Aliadxs />
-      <Faq />
+      <div className='w-6/12 pb-20'>
+        <h1 className='text-center text-4xl font-bold pb-6'>FAQS</h1>
+        <Faq /></div>
+      
     </main>
   )
 }
