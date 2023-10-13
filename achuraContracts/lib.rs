@@ -1,20 +1,19 @@
 use near_sdk::{env, near_bindgen, AccountId, Balance, Promise, Timestamp};
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
+use near_sdk::serde::{Serialize, Deserialize};
 use near_sdk::collections::LookupMap;
-use near_sdk::serde::Serialize;
 use schemars::JsonSchema;
 
 // Definición: Estructura de datos para crear transacciones
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, Serialize, JsonSchema)]
+#[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize, JsonSchema)]
 #[serde(crate = "near_sdk::serde")]
 pub struct Transaction {
     sender: AccountId,
     beneficiary: AccountId,
-    amount: u128,
+    amount: u32,
 	timestamp: Timestamp,
-	balance: Balance,
-    // hash: String
+	balance: Balance
 }
 
 // Definición: Estructura de datos para el rastreo de transacciones
@@ -41,8 +40,8 @@ impl Transactions {
 
     // Función: Emite transferencias
     #[payable]
-    pub fn transfer(&mut self, beneficiary_to_send: AccountId, amount_to_send: u128) {
-        let amount: u128 = amount_to_send;
+    pub fn transfer(&mut self, beneficiary_to_send: AccountId, amount_to_send: u32) {
+        let amount: u32 = amount_to_send;
         let sender: AccountId = env::predecessor_account_id();
         let balance: Balance = env::account_balance();
 		let timestamp: Timestamp = env::block_timestamp();
@@ -52,7 +51,7 @@ impl Transactions {
         // Validación: Verifica al sender y sus fondos
         if sender != env::predecessor_account_id() {
             env::panic_str("Solo el propietario de los fondos puede realizar una transferencia.");
-        } else if balance < amount {
+        } else if balance < amount.into() {
                 env::panic_str("Saldo insuficiente para realizar la transferencia.")
             }
 
@@ -91,7 +90,7 @@ impl Transactions {
             let transaction = Transaction {
                 sender: sender_clone2,
                 beneficiary: env::signer_account_id(),
-                amount,
+                amount: amount.try_into().unwrap(),
                 timestamp,
                 balance
             };
@@ -101,10 +100,10 @@ impl Transactions {
     
         self.transactions.insert(&sender_clone, &sender_transactions);
 
-        return transfer_promise;
+        transfer_promise
         } else {
             env::panic_str("No hay fondos disponibles para retirar.");
-        };
+        }
     }
 
     // Función: Admite el depósito de fondos
@@ -123,7 +122,7 @@ impl Transactions {
         let transaction = Transaction {
             sender: sender_clone,
             beneficiary: beneficiary_to_send,
-            amount: attached_deposit,
+            amount: attached_deposit as u32,
             timestamp,
             balance: current_balance
         };
