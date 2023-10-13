@@ -70,7 +70,6 @@ export const transfer = async (
     await contract.transfer({
       args: {
         beneficiary_to_send: recipent,
-        amount_to_send: parseInt(amount)
       },
       amount: parseInt(amount)
     })
