@@ -5,7 +5,7 @@ import OrgListPanel from '@/components/dashboard/OrgListPanel'
 import TxnPanel from '@/components/dashboard/TxnPanel'
 import WithdrawPanel from '@/components/dashboard/WithdrawPanel'
 import WalletContext from '@/context/walletContext'
-import { Divider, Skeleton, User } from '@nextui-org/react'
+import { Divider, Skeleton, User as UserComponent } from '@nextui-org/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
@@ -13,11 +13,17 @@ import BalancePanelSkeleton from '@/components/dashboard/skeleton/BalancePanelSk
 import OrgListPanelSkeleton from '@/components/dashboard/skeleton/OrgListPanelSkeleton'
 import WithdrawPanelSkeleton from '@/components/dashboard/skeleton/WithdrawPanelSkeleton'
 import TxnPanelSkeleton from '@/components/dashboard/skeleton/TxnPanelSkeleton'
-import { useWallet, useBalance, useGetUser, useTxsHistory, useFundOrg, useGetOrgs } from '@/hooks'
+import {
+  useWallet,
+  useBalance,
+  useGetUser,
+  useTxsHistory,
+  useFundOrg,
+  useGetOrgs
+} from '@/hooks'
 
 import { useWalletSelector } from '@/context/wallectSelectorContext'
-import { Organization, Txn } from '@/types/index'
-import { User as UserType } from '@/types'
+import { Organization, Txn, User, UserType } from '@/types'
 
 enum fetchState {
   loading = 'LOADING',
@@ -25,9 +31,7 @@ enum fetchState {
   success = 'SUCCESS'
 }
 
-
-
-function Page() {
+function Page () {
   const { accountId } = useWallet()
 
   const address = useContext(WalletContext)
@@ -39,13 +43,11 @@ function Page() {
   const { getOrgs } = useGetOrgs()
 
   // const [txHistory, useTxsHistory] = useState<Txn[] | null>(null)
-  const [orgs, setOrgs] = useState<Organization[] | null>(null)
-  const [user, setUser] = useState<UserType | null>(null)
-
+  const [orgs, setOrgs] = useState<User[] | null>(null)
+  const [user, setUser] = useState<User | null>(null)
 
   const { data: txHistory, getTxn } = useTxsHistory()
   const { fundOrg } = useFundOrg()
-
 
   useEffect(() => {
     if (accountId) {
@@ -56,19 +58,16 @@ function Page() {
 
       getUser(accountId).then(user => {
         setUser(user.data)
-
       })
       getTxn(accountId)
     }
 
-
     getOrgs().then(res => {
-      console.log(res.data);
+      console.log(res.data)
 
       setOrgs(res.data)
     })
   }, [])
-
 
   const getUserButton = () => {
     return user && user.type === 'sponsor' ? <FundPanel /> : <WithdrawPanel />
@@ -79,7 +78,7 @@ function Page() {
       <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '>
         {user ? (
           <>
-            <User
+            <UserComponent
               className='user flex justify-start'
               name={user.legalEntityName}
               description={user.type}
@@ -90,7 +89,6 @@ function Page() {
             {getUserButton()}
           </>
         ) : (
-
           <>
             <div className='max-w-[300px] w-full flex items-center gap-3'>
               <div>
@@ -103,7 +101,6 @@ function Page() {
             </div>
             <WithdrawPanelSkeleton />
           </>
-
         )}
         {balance ? (
           <BalancePanel balance={balance} />
@@ -112,7 +109,16 @@ function Page() {
         )}
 
         {txHistory ? <TxnPanel txns={txHistory} /> : <TxnPanelSkeleton />}
-        {orgs ? <OrgListPanel accountId={accountId as string} fundOrg={fundOrg} orgs={orgs} /> : <OrgListPanelSkeleton />}
+        {user?.type === UserType.sponsor &&
+          (orgs ? (
+            <OrgListPanel
+              accountId={accountId as string}
+              fundOrg={fundOrg}
+              orgs={orgs}
+            />
+          ) : (
+            <OrgListPanelSkeleton />
+          ))}
       </div>
       {state === fetchState.loading && (
         <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '></div>

@@ -1,5 +1,5 @@
 import { CONTRACT_ID } from '@/config'
-import { Organization } from '@/types'
+import { Organization, User } from '@/types'
 import {
   Button,
   Input,
@@ -14,14 +14,23 @@ import {
   ModalHeader,
   useDisclosure
 } from '@nextui-org/react'
-import React from 'react'
+import React, { useState } from 'react'
 
-function OrgListPanel({ orgs , fundOrg, accountId}: { orgs: Organization[], fundOrg: any, accountId: string }) {
+function OrgListPanel ({
+  orgs,
+  fundOrg,
+  accountId
+}: {
+  orgs: User[]
+  fundOrg: any
+  accountId: string
+}) {
+  const [orgData, setOrgData] = useState<User | null>(null)
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 
-  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: any) => {
     e.preventDefault()
-   fundOrg(accountId ,100000, CONTRACT_ID)
+    fundOrg(accountId, e.target.amount, orgData?.accountId)
     onClose()
   }
   return (
@@ -36,6 +45,7 @@ function OrgListPanel({ orgs , fundOrg, accountId}: { orgs: Organization[], fund
               <Input
                 className='text-black'
                 isRequired
+                name='amount'
                 type='number'
                 label='Amount'
                 placeholder='Amount in USD'
@@ -65,7 +75,14 @@ function OrgListPanel({ orgs , fundOrg, accountId}: { orgs: Organization[], fund
               <Divider />
               <CardBody className='gap-2'>
                 <p>{org.legalDescription}</p>
-                <Button onPress={onOpen}>Fund!</Button>
+                <Button
+                  onPress={() => {
+                    setOrgData(org)
+                    onOpen()
+                  }}
+                >
+                  Fund!
+                </Button>
               </CardBody>
             </Card>
           ))}
