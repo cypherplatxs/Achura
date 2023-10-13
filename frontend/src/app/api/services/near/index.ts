@@ -72,6 +72,7 @@ export const transfer = async (
         beneficiary_to_send: recipent,
         amount_to_send: parseInt(amount)
       },
+      amount: parseInt(amount)
     })
     return contract
   } catch (error) {
@@ -82,7 +83,7 @@ export const transfer = async (
 export const withdraw = async (accountId: string, amount: number, recipent: string) => {
   try {
     if (!nearConnection) {
-      await connectNear()
+      await connectNear(accountId)
     }
 
     const account = await nearConnection.account(accountId)
