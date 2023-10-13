@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import {
   Button,
   Card,
@@ -6,22 +6,23 @@ import {
   CardHeader,
   Divider,
   Input,
+  Link,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  useDisclosure,
-} from '@nextui-org/react';
-import React, { useState } from 'react';
+  useDisclosure
+} from '@nextui-org/react'
+import React, { useState } from 'react'
 
-function FundPanel() {
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+function FundPanel () {
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onClose();
-  };
+    e.preventDefault()
+    onClose()
+  }
 
   return (
     <>
@@ -44,7 +45,7 @@ function FundPanel() {
               <Button color='danger' variant='light' onPress={onClose}>
                 Close
               </Button>
-              <Button color='primary' type='submit' >
+              <Button color='primary' type='submit'>
                 Fund!
               </Button>
             </ModalFooter>
@@ -55,13 +56,11 @@ function FundPanel() {
         <CardHeader>Fund your account!</CardHeader>
         <Divider />
         <CardBody>
-          <Button onPress={onOpen} variant='shadow'>
-            Fund!
-          </Button>
+            <Button href='https://ramptest.alchemypay.org/#/' target='_blank' as={Link}  variant='shadow'>Fund!</Button>
         </CardBody>
       </Card>
     </>
-  );
+  )
 }
 
-export default FundPanel;
+export default FundPanel
