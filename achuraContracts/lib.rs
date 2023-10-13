@@ -11,7 +11,7 @@ use schemars::JsonSchema;
 pub struct Transaction {
     sender: AccountId,
     beneficiary: AccountId,
-    amount: u32,
+    amount: u128,
 	timestamp: Timestamp,
 	balance: Balance
 }
@@ -40,8 +40,8 @@ impl Transactions {
 
     // Función: Emite transferencias
     #[payable]
-    pub fn transfer(&mut self, beneficiary_to_send: AccountId, amount_to_send: u32) {
-        let amount: u32 = amount_to_send;
+    pub fn transfer(&mut self, beneficiary_to_send: AccountId) {
+        let amount: u128 = env::attached_deposit();
         let sender: AccountId = env::predecessor_account_id();
         let balance: Balance = env::account_balance();
 		let timestamp: Timestamp = env::block_timestamp();
@@ -51,7 +51,7 @@ impl Transactions {
         // Validación: Verifica al sender y sus fondos
         if sender != env::predecessor_account_id() {
             env::panic_str("Solo el propietario de los fondos puede realizar una transferencia.");
-        } else if balance < amount.into() {
+        } else if balance < amount {
                 env::panic_str("Saldo insuficiente para realizar la transferencia.")
             }
 
@@ -70,9 +70,9 @@ impl Transactions {
     }
 
     // Función: Realiza retiros si se tiene saldo
-    pub fn withdraw(&mut self, beneficiary_to_send: AccountId, amount_to_send: u32) -> Promise {
+    pub fn withdraw(&mut self, beneficiary_to_send: AccountId) -> Promise {
         let sender = env::predecessor_account_id();
-        let amount: u32 = amount_to_send;
+        let amount: u128 = env::attached_deposit();
         let balance: Balance = env::account_balance();
 		let timestamp: Timestamp = env::block_timestamp();
 		let sender_clone: AccountId = sender.clone();
@@ -86,7 +86,7 @@ impl Transactions {
 
         // Calcula: Saldo para retirar
         if total_amount > 0 {
-            let transfer_promise = Promise::new(sender).transfer(amount.into());
+            let transfer_promise = Promise::new(sender).transfer(amount);
 
             let transaction = Transaction {
                 sender: sender_clone2,
