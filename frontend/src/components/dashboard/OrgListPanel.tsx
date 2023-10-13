@@ -1,4 +1,5 @@
-import { Organization } from '@/types/index.types'
+import { CONTRACT_ID } from '@/config'
+import { Organization } from '@/types'
 import {
   Button,
   Input,
@@ -15,11 +16,12 @@ import {
 } from '@nextui-org/react'
 import React from 'react'
 
-function OrgListPanel({ orgs }: { orgs: Organization[] }) {
+function OrgListPanel({ orgs , fundOrg, accountId}: { orgs: Organization[], fundOrg: any, accountId: string }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+   fundOrg(accountId ,100000, CONTRACT_ID)
     onClose()
   }
   return (

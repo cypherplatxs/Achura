@@ -13,7 +13,7 @@ import BalancePanelSkeleton from '@/components/dashboard/skeleton/BalancePanelSk
 import OrgListPanelSkeleton from '@/components/dashboard/skeleton/OrgListPanelSkeleton'
 import WithdrawPanelSkeleton from '@/components/dashboard/skeleton/WithdrawPanelSkeleton'
 import TxnPanelSkeleton from '@/components/dashboard/skeleton/TxnPanelSkeleton'
-import { useWallet, useBalance, useGetUser, useTxsHistory } from '@/hooks'
+import { useWallet, useBalance, useGetUser, useTxsHistory, useFundOrg } from '@/hooks'
 
 import { useWalletSelector } from '@/context/wallectSelectorContext'
 import { Organization, Txn } from '@/types/index'
@@ -43,6 +43,7 @@ function Page () {
 
 
   const { data: txHistory, getTxn } = useTxsHistory()
+  const { fundOrg } = useFundOrg()
 
 
   useEffect(() => {
@@ -108,7 +109,7 @@ function Page () {
         )}
 
         {txHistory ? <TxnPanel txns={txHistory} /> : <TxnPanelSkeleton />}
-        {orgs ? <OrgListPanel orgs={orgs} /> : <OrgListPanelSkeleton />}
+        {orgs ? <OrgListPanel accountId={accountId as string} fundOrg={fundOrg} orgs={orgs} /> : <OrgListPanelSkeleton />}
       </div>
       {state === fetchState.loading && (
         <div className='w-full h-full flex flex-col lg:dashboard__lg gap-10 px-5 py-10 '></div>
