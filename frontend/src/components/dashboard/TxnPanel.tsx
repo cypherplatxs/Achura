@@ -32,6 +32,7 @@ function TxnPanel ({ txns }: { txns: Txn[] }) {
       }
     }
   }
+  console.debug(txns)
 
   return (
     <Card className='txnHistory'>
@@ -44,7 +45,7 @@ function TxnPanel ({ txns }: { txns: Txn[] }) {
             <TableColumn>Beneficiary</TableColumn>
             <TableColumn>Value</TableColumn>
           </TableHeader>
-          <TableBody>
+          <TableBody className='overflow-y-scroll'>
             {txns.map((txn, index) => (
               <TableRow key={index}>
                 <TableCell onClick={handleOnClick} className='cursor-pointer'>

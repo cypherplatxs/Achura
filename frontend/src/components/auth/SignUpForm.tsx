@@ -28,7 +28,7 @@ const schema = yup.object({
     .required(),
   representativeEmail: yup.string().required(),
   legalEntityName: yup.string().required(),
-  legalDescription: yup.number().positive().integer().required(),
+  legalDescription: yup.string().required(),
   legalEntityEmail: yup.string().email().required(),
   legalEntityAddress: yup.string().max(40).required(),
   legalEntityTaxRegistrationNumber: yup
@@ -132,10 +132,10 @@ export function SignUpForm ({ handleOnSubmit, isLoading }: SignUpFormProps) {
           errorMessage={
             errors.legalDescription && 'Please enter a valid legal description'
           }
-          inputMode='numeric'
+          inputMode='text'
           label='Legal description'
-          type='number'
-          placeholder='892702'
+          type='text'
+          placeholder='Some description'
           name='legalDescription'
         />
         <Input
@@ -186,12 +186,6 @@ export function SignUpForm ({ handleOnSubmit, isLoading }: SignUpFormProps) {
           label='Legal Entity country'
           placeholder='CountryABC'
           name='legalEntityCountry'
-        />
-        <Textarea
-          className='md:col-span-2'
-          inputMode='text'
-          label='Account description'
-          placeholder='Some description'
         />
       </div>
       <Divider />
