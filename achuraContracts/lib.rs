@@ -70,37 +70,40 @@ impl Transactions {
     }
 
     // Función: Realiza retiros si se tiene saldo
-    pub fn withdraw(&mut self) -> Promise {
+    pub fn withdraw(&mut self, beneficiary_to_send: AccountId, amount_to_send: u32) -> Promise {
         let sender = env::predecessor_account_id();
-        let amount: u128 = env::account_balance();
+        let amount: u32 = amount_to_send;
         let balance: Balance = env::account_balance();
 		let timestamp: Timestamp = env::block_timestamp();
 		let sender_clone: AccountId = sender.clone();
         let sender_clone2: AccountId = sender.clone();
+        let beneficiary = beneficiary_to_send;
         let sender_transactions = self.transactions.get(&sender).unwrap_or_default();
 
         // Calcula: Fondos disponibles para retirar
 		let total_amount: Balance = sender_transactions.iter()
         .map(|t| Into::<Balance>::into(t.amount)).sum();
 
+        println!("Your total amount is {}", total_amount);
+
         // Calcula: Saldo para retirar
         if total_amount > 0 {
-            let transfer_promise = Promise::new(sender).transfer(total_amount);
+            let transfer_promise = Promise::new(sender).transfer(amount.into());
 
             let transaction = Transaction {
                 sender: sender_clone2,
-                beneficiary: env::signer_account_id(),
-                amount: amount.try_into().unwrap(),
+                beneficiary,
+                amount,
                 timestamp,
                 balance
             };
     
-        let mut sender_transactions = self.transactions.get(&sender_clone).unwrap_or_default();
-        sender_transactions.push(transaction);
+            let mut sender_transactions = self.transactions.get(&sender_clone).unwrap_or_default();
+            sender_transactions.push(transaction);
     
-        self.transactions.insert(&sender_clone, &sender_transactions);
+            self.transactions.insert(&sender_clone, &sender_transactions);
 
-        transfer_promise
+            transfer_promise
         } else {
             env::panic_str("No hay fondos disponibles para retirar.");
         }

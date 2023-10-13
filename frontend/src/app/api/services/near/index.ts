@@ -67,6 +67,25 @@ export const transfer = async (accountId: string, amount: number, recipent: stri
   }
 }
 
+export const withdraw = async () => {
+  try {
+    if (!nearConnection) {
+      await connectNear()
+    }
+
+    const account = await nearConnection.account()
+    const response = await account.functionCall({
+      args: {beneficiary_to_send: recipent,
+      amount}, contractId: 'juminstock1.testnet'
+    })
+
+    return response
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getAccountBalance = async (accountId: string) => {
   try {
     if (!nearConnection) {
