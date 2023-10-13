@@ -106,34 +106,6 @@ impl Transactions {
         }
     }
 
-    // Función: Admite el depósito de fondos
-    #[payable]
-    pub fn receive_funds(&mut self, beneficiary_to_send: AccountId) {
-        let sender = env::predecessor_account_id();
-		let timestamp: Timestamp = env::block_timestamp();
-		let sender_clone: AccountId = sender.clone();
-        
-        // Actualiza: Balance de las cuentas
-        let current_balance = env::account_balance();
-        let attached_deposit = env::attached_deposit();
-        let new_balance = current_balance + attached_deposit;
-        env::log_str(format!("Nuevo balance: {} tokens", new_balance).as_str());
-
-        let transaction = Transaction {
-            sender: sender_clone,
-            beneficiary: beneficiary_to_send,
-            amount: attached_deposit as u32,
-            timestamp,
-            balance: current_balance
-        };
-
-        let mut sender_transactions = self.transactions.get(&sender).unwrap_or_default();
-        sender_transactions.push(transaction);
-
-        self.transactions.insert(&sender, &sender_transactions);
-
-    }
-
     // Función: Obtiene todas las transacciones de una cuenta ID
     pub fn get_transaction_history(&self, account_id: AccountId) -> Vec<Transaction> {
         self.transactions.get(&account_id).unwrap_or_default()
