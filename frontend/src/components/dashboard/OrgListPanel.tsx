@@ -61,10 +61,10 @@ function OrgListPanel({ orgs , fundOrg, accountId}: { orgs: Organization[], fund
         <div className='w-full grid overflow-y-scroll gap-5 lg:grid-cols-2 p-2 rounded-md max-h-64'>
           {orgs.map((org, index) => (
             <Card key={index}>
-              <CardHeader>{org.name}</CardHeader>
+              <CardHeader>{org.legalEntityName}</CardHeader>
               <Divider />
               <CardBody className='gap-2'>
-                <p>{org.description}</p>
+                <p>{org.legalDescription}</p>
                 <Button onPress={onOpen}>Fund!</Button>
               </CardBody>
             </Card>

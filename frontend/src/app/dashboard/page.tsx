@@ -13,7 +13,7 @@ import BalancePanelSkeleton from '@/components/dashboard/skeleton/BalancePanelSk
 import OrgListPanelSkeleton from '@/components/dashboard/skeleton/OrgListPanelSkeleton'
 import WithdrawPanelSkeleton from '@/components/dashboard/skeleton/WithdrawPanelSkeleton'
 import TxnPanelSkeleton from '@/components/dashboard/skeleton/TxnPanelSkeleton'
-import { useWallet, useBalance, useGetUser, useTxsHistory, useFundOrg } from '@/hooks'
+import { useWallet, useBalance, useGetUser, useTxsHistory, useFundOrg, useGetOrgs } from '@/hooks'
 
 import { useWalletSelector } from '@/context/wallectSelectorContext'
 import { Organization, Txn } from '@/types/index'
@@ -27,7 +27,7 @@ enum fetchState {
 
 
 
-function Page () {
+function Page() {
   const { accountId } = useWallet()
 
   const address = useContext(WalletContext)
@@ -36,6 +36,7 @@ function Page () {
   const [balance, setBalance] = useState<string | null>(null)
   const { getBalance } = useBalance()
   const { getUser } = useGetUser()
+  const { getOrgs } = useGetOrgs()
 
   // const [txHistory, useTxsHistory] = useState<Txn[] | null>(null)
   const [orgs, setOrgs] = useState<Organization[] | null>(null)
@@ -61,8 +62,10 @@ function Page () {
     }
 
 
-    axios.get('/api/get-orgs').then(res => {
-      setOrgs(res.data.orgs)
+    getOrgs().then(res => {
+      console.log(res.data);
+
+      setOrgs(res.data)
     })
   }, [])
 
