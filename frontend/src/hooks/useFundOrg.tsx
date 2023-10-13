@@ -11,7 +11,11 @@ function useFundOrg () {
     recipent: string
   ) => {
     try {
-      const res = await blockchain.fundOrg(accountId, amount, recipent)
+      const res = await blockchain.fundOrg(
+        accountId,
+        amount,
+        recipent
+      )
       setData(res.data)
     } catch (error) {
       setError(JSON.stringify(error))

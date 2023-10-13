@@ -30,6 +30,7 @@ function OrgListPanel ({
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault()
+    console.debug(  (parseInt(e.target.amount.value)*10**16).toString())
     fundOrg(accountId, e.target.amount.value, orgData?.accountId)
     onClose()
   }
@@ -48,7 +49,7 @@ function OrgListPanel ({
                 name='amount'
                 type='number'
                 label='Amount'
-                placeholder='Amount in USD'
+                placeholder='Amount in NEAR'
               />
             </ModalBody>
             <ModalFooter>

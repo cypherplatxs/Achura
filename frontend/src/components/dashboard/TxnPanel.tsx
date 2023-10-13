@@ -39,13 +39,19 @@ function TxnPanel ({ txns }: { txns: Txn[] }) {
       <CardHeader>Transactions history</CardHeader>
       <Divider />
       <CardBody>
-        <Table aria-label='Txn history'>
+        <Table
+          classNames={{
+            base: 'max-h-[40vh] overflow-scroll',
+            table: 'min-h-[40vh]'
+          }}
+          aria-label='Txn history'
+        >
           <TableHeader>
             <TableColumn>Sender</TableColumn>
             <TableColumn>Beneficiary</TableColumn>
             <TableColumn>Value</TableColumn>
           </TableHeader>
-          <TableBody className='overflow-y-scroll'>
+          <TableBody emptyContent={"Aún no hay transacciónes asociadas a tu cuenta."}>
             {txns.map((txn, index) => (
               <TableRow key={index}>
                 <TableCell onClick={handleOnClick} className='cursor-pointer'>

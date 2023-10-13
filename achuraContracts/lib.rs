@@ -11,9 +11,9 @@ use schemars::JsonSchema;
 pub struct Transaction {
     sender: AccountId,
     beneficiary: AccountId,
-    amount: u32,
-    timestamp: Timestamp,
-    balance: Balance,
+    amount: u128,
+	timestamp: Timestamp,
+	balance: Balance
 }
 
 // Definición: Estructura de datos para el rastreo de transacciones
@@ -40,8 +40,8 @@ impl Transactions {
 
     // Función: Emite transferencias
     #[payable]
-    pub fn transfer(&mut self, beneficiary_to_send: AccountId, amount_to_send: u32) {
-        let amount: u32 = amount_to_send;
+    pub fn transfer(&mut self, beneficiary_to_send: AccountId) {
+        let amount: u128 = env::attached_deposit();
         let sender: AccountId = env::predecessor_account_id();
         let balance: Balance = env::account_balance();
         let timestamp: Timestamp = env::block_timestamp();
@@ -51,9 +51,9 @@ impl Transactions {
         // Validación: Verifica al sender y sus fondos
         if sender != env::predecessor_account_id() {
             env::panic_str("Solo el propietario de los fondos puede realizar una transferencia.");
-        } else if balance < amount.into() {
-            env::panic_str("Saldo insuficiente para realizar la transferencia.")
-        }
+        } else if balance < amount {
+                env::panic_str("Saldo insuficiente para realizar la transferencia.")
+            }
 
         let transaction = Transaction {
             sender: sender.clone(),
@@ -82,13 +82,14 @@ impl Transactions {
     }
 
     // Función: Realiza retiros si se tiene saldo
-    pub fn withdraw(&mut self) -> Promise {
+    pub fn withdraw(&mut self, beneficiary_to_send: AccountId) -> Promise {
         let sender = env::predecessor_account_id();
-        let amount: u128 = env::account_balance();
+        let amount: u128 = env::attached_deposit();
         let balance: Balance = env::account_balance();
         let timestamp: Timestamp = env::block_timestamp();
         let sender_clone: AccountId = sender.clone();
         let sender_clone2: AccountId = sender.clone();
+        let beneficiary = beneficiary_to_send;
         let sender_transactions = self.transactions.get(&sender).unwrap_or_default();
 
         // Calcula: Fondos disponibles para retirar
@@ -99,21 +100,22 @@ impl Transactions {
 
         // Calcula: Saldo para retirar
         if total_amount > 0 {
-            let transfer_promise = Promise::new(sender).transfer(total_amount);
+            let transfer_promise = Promise::new(sender).transfer(amount);
 
             let transaction = Transaction {
                 sender: sender_clone2,
-                beneficiary: env::signer_account_id(),
-                amount: amount.try_into().unwrap(),
+                beneficiary,
+                amount,
                 timestamp,
                 balance,
             };
 
+            println!("Your total amount is {}", total_amount);
+    
             let mut sender_transactions = self.transactions.get(&sender_clone).unwrap_or_default();
             sender_transactions.push(transaction);
-
-            self.transactions
-                .insert(&sender_clone, &sender_transactions);
+    
+            self.transactions.insert(&sender_clone, &sender_transactions);
 
             transfer_promise
         } else {
