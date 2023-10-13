@@ -54,15 +54,15 @@ export const getAccountTransactions = async (accountId: string) => {
 
 export const transfer = async (
   accountId: string,
-  amount: number,
+  amount: string,
   recipent: string
 ) => {
+  console.log(typeof accountId, typeof amount, typeof recipent)
   try {
     if (!nearConnection) {
       await connectNear(accountId)
     }
     const account = await nearConnection.account(accountId)
-    console.log(account.connection.signer)
     const contract: any = new Contract(account, CONTRACT_ID, {
       viewMethods: [],
       changeMethods: ['transfer']
@@ -70,13 +70,10 @@ export const transfer = async (
     await contract.transfer({
       args: {
         beneficiary_to_send: recipent,
-        amount_to_send: amount
-      }
+        amount_to_send: parseInt(amount)
+      },
     })
-    console.log(account)
-    console.log({ contract })
     return contract
-    return true
   } catch (error) {
     console.log(error)
   }

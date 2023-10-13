@@ -30,7 +30,7 @@ function OrgListPanel ({
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault()
-    fundOrg(accountId, e.target.amount, orgData?.accountId)
+    fundOrg(accountId, e.target.amount.value, orgData?.accountId)
     onClose()
   }
   return (
