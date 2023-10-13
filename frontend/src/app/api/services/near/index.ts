@@ -57,29 +57,45 @@ export const transfer = async (
   amount: string,
   recipent: string
 ) => {
-  console.log(typeof accountId, typeof amount, typeof recipent)
   try {
     if (!nearConnection) {
       await connectNear(accountId)
     }
     const account = await nearConnection.account(accountId)
+
+    console.log(accountId, typeof amount, recipent)
+    console.log(account.connection.signer)
     const contract: any = new Contract(account, CONTRACT_ID, {
       viewMethods: [],
       changeMethods: ['transfer']
     })
-    await contract.transfer({
-      args: {
-        beneficiary_to_send: recipent,
+    const response = await contract.transfer(
+      {
+        beneficiary_to_send: recipent
       },
-      amount: parseInt(amount)
-    })
-    return contract
+      '300000000000000', 
+      parseInt(amount) 
+    )
+    console.log(response)
+    // const contract = await account.functionCall(
+    //   { beneficiary_to_send: recipent},
+    //   CONTRACT_ID,
+    //   'transfer',
+    //   parseFloat(amount)
+
+    // )
+
+    return response
   } catch (error) {
     console.log(error)
   }
 }
 
-export const withdraw = async (accountId: string, amount: number, recipent: string) => {
+export const withdraw = async (
+  accountId: string,
+  amount: number,
+  recipent: string
+) => {
   try {
     if (!nearConnection) {
       await connectNear(accountId)
@@ -87,12 +103,11 @@ export const withdraw = async (accountId: string, amount: number, recipent: stri
 
     const account = await nearConnection.account(accountId)
     const response = await account.functionCall({
-      args: {beneficiary_to_send: recipent,
-      amount}, contractId: 'juminstock1.testnet'
+      args: { beneficiary_to_send: recipent, amount },
+      contractId: CONTRACT_ID
     })
 
     return response
-
   } catch (error) {
     console.log(error)
   }
