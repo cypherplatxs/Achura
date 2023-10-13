@@ -1,70 +1,88 @@
+import { CONTRACT_ID } from '@/config'
 import { keyStores, KeyPair, connect, Contract } from 'near-api-js'
 
 const keyStore = new keyStores.InMemoryKeyStore()
 
-if(!process.env.NEAR_KEY) {
-  throw new Error("Missing near key");
+if (!process.env.NEAR_KEY) {
+  throw new Error('Missing near key')
 }
 
 const keyPair = KeyPair.fromString(process.env.NEAR_KEY)
 
-keyStore.setKey('testnet', 'example-account.testnet', keyPair).then(() => {
-  console.log('✅ near key was set')
-})
-
-const connectionConfig = {
-  networkId: 'testnet',
-  keyStore: keyStore,
-  nodeUrl: 'https://rpc.testnet.near.org',
-  walletUrl: 'https://wallet.testnet.near.org',
-  helperUrl: 'https://helper.testnet.near.org',
-  explorerUrl: 'https://explorer.testnet.near.org'
+const setKey = (accountId: string) => {
+  keyStore.setKey('testnet', accountId, keyPair).then(() => {
+    console.log('✅ near key was set')
+  })
+  return {
+    networkId: 'testnet',
+    keyStore: keyStore,
+    nodeUrl: 'https://rpc.testnet.near.org',
+    walletUrl: 'https://wallet.testnet.near.org',
+    helperUrl: 'https://helper.testnet.near.org',
+    explorerUrl: 'https://explorer.testnet.near.org'
+  }
 }
+
 let nearConnection: any = null
 
-const connectNear = async () => {
+const connectNear = async (accountId: string) => {
+  const connectionConfig = setKey(accountId)
   nearConnection = await connect(connectionConfig)
 }
 
 export const getAccountTransactions = async (accountId: string) => {
   try {
     if (!nearConnection) {
-      await connectNear()
+      await connectNear(accountId)
     }
 
     const account = await nearConnection.account(accountId)
     const response = await account.viewFunction({
-      methodName: "get_transaction_history",
-      contractId: "juminstock1.testnet",
+      methodName: 'get_transaction_history',
+      contractId: CONTRACT_ID,
       args: {
-          account_id: accountId
-        }
+        account_id: accountId
+      }
     })
     console.log(response)
-    // const contract: any = new Contract(account, 'juminstock1.testnet', {
-    //   changeMethods: [],
-    //   viewMethods: ['get_transaction_history']
-    // })
-
-    // const response = await contract.get_transaction_history({
-    //   account_id: accountId
-    // })
-    // console.log({ response })
-
-    // return responsehistory({
-    //   account_id: accountId
-    // })
-    // console.log({ response })
 
     return response
   } catch (error) {
     console.log(error)
   }
 }
+
+export const transfer = async (
+  accountId: string,
+  amount: string,
+  recipent: string
+) => {
+  console.log(typeof accountId, typeof amount, typeof recipent)
+  try {
+    if (!nearConnection) {
+      await connectNear(accountId)
+    }
+    const account = await nearConnection.account(accountId)
+    const contract: any = new Contract(account, CONTRACT_ID, {
+      viewMethods: [],
+      changeMethods: ['transfer']
+    })
+    await contract.transfer({
+      args: {
+        beneficiary_to_send: recipent,
+        amount_to_send: parseInt(amount)
+      },
+    })
+    return contract
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getAccountBalance = async (accountId: string) => {
   try {
     if (!nearConnection) {
-      await connectNear()
+      await connectNear(accountId)
     }
 
     const account = await nearConnection.account(accountId)

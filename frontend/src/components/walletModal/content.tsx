@@ -1,5 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { providers, utils } from "near-api-js";
+import { CONTRACT_ID } from "@/config";
 import type {
   AccountView,
   CodeResult,
@@ -17,7 +18,7 @@ import Messages from "./messages";
 type Submitted = SubmitEvent & {
   target: { elements: { [key: string]: HTMLInputElement } };
 };
-const CONTRACT_ID = "juminstock1.testnet";
+
 
 
 const SUGGESTED_DONATION = "0";
