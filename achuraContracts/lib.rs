@@ -1,7 +1,7 @@
-use near_sdk::{env, near_bindgen, AccountId, Balance, Promise, Timestamp};
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::serde::{Serialize, Deserialize};
 use near_sdk::collections::LookupMap;
+use near_sdk::serde::{Deserialize, Serialize};
+use near_sdk::{env, near_bindgen, AccountId, Balance, Promise, Timestamp};
 use schemars::JsonSchema;
 
 // Definición: Estructura de datos para crear transacciones
@@ -24,9 +24,9 @@ pub struct Transactions {
 }
 
 impl Default for Transactions {
-	fn default() -> Self {
-	Self::new()
-	}
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 #[near_bindgen]
@@ -44,9 +44,9 @@ impl Transactions {
         let amount: u128 = env::attached_deposit();
         let sender: AccountId = env::predecessor_account_id();
         let balance: Balance = env::account_balance();
-		let timestamp: Timestamp = env::block_timestamp();
+        let timestamp: Timestamp = env::block_timestamp();
         let beneficiary: AccountId = beneficiary_to_send;
-		let sender_clone: AccountId = sender.clone();
+        let sender_clone: AccountId = sender.clone();
 
         // Validación: Verifica al sender y sus fondos
         if sender != env::predecessor_account_id() {
@@ -56,17 +56,29 @@ impl Transactions {
             }
 
         let transaction = Transaction {
-            sender,
-            beneficiary,
+            sender: sender.clone(),
+            beneficiary: beneficiary.clone(),
             amount,
-			timestamp,
-			balance
+            timestamp,
+            balance,
+        };
+
+        let tx2 = Transaction {
+            sender,
+            beneficiary: beneficiary.clone(),
+            amount,
+            timestamp,
+            balance,
         };
 
         let mut sender_transactions = self.transactions.get(&sender_clone).unwrap_or_default();
         sender_transactions.push(transaction);
+        self.transactions
+            .insert(&sender_clone, &sender_transactions);
 
-        self.transactions.insert(&sender_clone, &sender_transactions);
+        let mut receiver_tx = self.transactions.get(&beneficiary).unwrap_or_default();
+        receiver_tx.push(tx2);
+        self.transactions.insert(&beneficiary, &receiver_tx);
     }
 
     // Función: Realiza retiros si se tiene saldo
@@ -74,15 +86,17 @@ impl Transactions {
         let sender = env::predecessor_account_id();
         let amount: u128 = env::attached_deposit();
         let balance: Balance = env::account_balance();
-		let timestamp: Timestamp = env::block_timestamp();
-		let sender_clone: AccountId = sender.clone();
+        let timestamp: Timestamp = env::block_timestamp();
+        let sender_clone: AccountId = sender.clone();
         let sender_clone2: AccountId = sender.clone();
         let beneficiary = beneficiary_to_send;
         let sender_transactions = self.transactions.get(&sender).unwrap_or_default();
 
         // Calcula: Fondos disponibles para retirar
-		let total_amount: Balance = sender_transactions.iter()
-        .map(|t| Into::<Balance>::into(t.amount)).sum();
+        let total_amount: Balance = sender_transactions
+            .iter()
+            .map(|t| Into::<Balance>::into(t.amount))
+            .sum();
 
         // Calcula: Saldo para retirar
         if total_amount > 0 {
@@ -93,7 +107,7 @@ impl Transactions {
                 beneficiary,
                 amount,
                 timestamp,
-                balance
+                balance,
             };
 
             println!("Your total amount is {}", total_amount);
