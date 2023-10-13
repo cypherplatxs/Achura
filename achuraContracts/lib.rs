@@ -84,8 +84,6 @@ impl Transactions {
 		let total_amount: Balance = sender_transactions.iter()
         .map(|t| Into::<Balance>::into(t.amount)).sum();
 
-        println!("Your total amount is {}", total_amount);
-
         // Calcula: Saldo para retirar
         if total_amount > 0 {
             let transfer_promise = Promise::new(sender).transfer(amount.into());
@@ -97,6 +95,8 @@ impl Transactions {
                 timestamp,
                 balance
             };
+
+            println!("Your total amount is {}", total_amount);
     
             let mut sender_transactions = self.transactions.get(&sender_clone).unwrap_or_default();
             sender_transactions.push(transaction);
