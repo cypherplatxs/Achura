@@ -17,7 +17,7 @@ import Messages from "./messages";
 type Submitted = SubmitEvent & {
   target: { elements: { [key: string]: HTMLInputElement } };
 };
-const CONTRACT_ID = "guest-book.testnet";
+const CONTRACT_ID = "juminstock1.testnet";
 
 
 const SUGGESTED_DONATION = "0";

@@ -8,7 +8,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { distinctUntilChanged, map } from "rxjs";
 import { Loading } from "@/components/walletModal/loading";
 
-const CONTRACT_ID = "guest-book.testnet";
+const CONTRACT_ID = "juminstock1.testnet";
 declare global {
   interface Window {
     selector: WalletSelector;
