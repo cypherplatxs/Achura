@@ -42,7 +42,6 @@ function TxnPanel ({ txns }: { txns: Txn[] }) {
         <Table
           classNames={{
             base: 'max-h-[40vh] overflow-scroll',
-            table: 'min-h-[40vh]'
           }}
           aria-label='Txn history'
         >
