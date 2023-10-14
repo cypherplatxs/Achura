@@ -88,7 +88,6 @@ impl Transactions {
         let balance: Balance = env::account_balance();
         let timestamp: Timestamp = env::block_timestamp();
         let sender_clone: AccountId = sender.clone();
-        let sender_clone2: AccountId = sender.clone();
         let beneficiary = beneficiary_to_send;
         let sender_transactions = self.transactions.get(&sender).unwrap_or_default();
 
@@ -100,11 +99,19 @@ impl Transactions {
 
         // Calcula: Saldo para retirar
         if total_amount > 0 {
-            let transfer_promise = Promise::new(sender).transfer(amount);
+            let transfer_promise = Promise::new(sender.clone()).transfer(amount);
 
             let transaction = Transaction {
-                sender: sender_clone2,
-                beneficiary,
+                sender: sender.clone(),
+                beneficiary: beneficiary.clone(),
+                amount,
+                timestamp,
+                balance,
+            };
+
+            let tx2 = Transaction {
+                sender,
+                beneficiary: beneficiary.clone(),
                 amount,
                 timestamp,
                 balance,
@@ -116,6 +123,10 @@ impl Transactions {
             sender_transactions.push(transaction);
     
             self.transactions.insert(&sender_clone, &sender_transactions);
+
+            let mut receiver_tx = self.transactions.get(&beneficiary).unwrap_or_default();
+            receiver_tx.push(tx2);
+            self.transactions.insert(&beneficiary, &receiver_tx);
 
             transfer_promise
         } else {
