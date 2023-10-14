@@ -3,4 +3,4 @@ export const PATHS = {
     AUTH: '/auth',
 }
 
-export const CONTRACT_ID = 'juminstock4.testnet'
+export const CONTRACT_ID = 'juminstock5.testnet'
