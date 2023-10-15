@@ -11,7 +11,7 @@
 <p>Achura es una plataforma de donación y financiación para proyectos sociales y de bien público que
 utiliza blockchain para la transparencia de los fondos y para su expansión a través de nodos locales.</p>
 
-<p>Achura busca resolver los problemas de las ONGs que reciben dinero desde cooperación internaconal y constantemente pierden dinero en los cambios de divias y en los costos de transacción de los bancos 
+<p>Achura busca resolver los problemas de las ONGs que reciben dinero desde cooperación internaconal y constantemente pierden dinero en los cambios de divias y en los costos de transacción de los bancos.
 </p>
 
 <!-- <p> Achura utiliza <a href="https://www.kravata.co/">Kratava</a> para cambiar los actvos locales en criptomonedas y viceversa</p> -->
