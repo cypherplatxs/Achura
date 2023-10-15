@@ -3,17 +3,18 @@
 <img align='right' src='https://user-images.githubusercontent.com/5713670/87202985-820dcb80-c2b6-11ea-9f56-7ec461c497c3.gif' width='200'>
 
 
-<a href="https://achura.co/" target="_blank"> <h1 align="center">  🦙  Achura</h1></a>
+<a href="https://achura.co/" target="_blank"> <h1 align="center">Achura 🦙</h1></a>
 
 <h2 align="center">Empowering NGO's </h2>
 
 
-<p>Achura es un proyecto para potenciar la adoción de criptomonedas y el uso de blockchains por parte de ONGS, Achura que sirve para que las ONG puedan utilizar criptomonedass y recibirlas los activos en divisas que puedan convetir as sus divisas locales</p>
+<p>Achura es una plataforma de donación y financiación para proyectos sociales y de bien público que
+utiliza blockchain para la transparencia de los fondos y para su expansión a través de nodos locales.</p>
 
-<p>Achura espera resolver los problemas de las ong que resiven dinero desde  cooperación internaconal y constantemente pierden dinero en los cambios de divias y en los costos de transacción de los bancos 
+<p>Achura busca resolver los problemas de las ONGs que reciben dinero desde cooperación internaconal y constantemente pierden dinero en los cambios de divias y en los costos de transacción de los bancos 
 </p>
 
-<p> Achura utiliza <a href="https://www.kravata.co/">Kratava</a> para cambiar los actvos locales en criptomonedas y viceversa</p>
+<!-- <p> Achura utiliza <a href="https://www.kravata.co/">Kratava</a> para cambiar los actvos locales en criptomonedas y viceversa</p> -->
 
 <details>
 <summary> <h1><b> Preguntas frecuentes</b> </h1></summary>
