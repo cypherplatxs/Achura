@@ -1,5 +1,5 @@
 import { parseHash } from '@/functions'
-import { Txn } from '@/types/index.types'
+import { Txn } from '@/types/server/index.types'
 import {
   Card,
   CardBody,

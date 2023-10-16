@@ -4,19 +4,16 @@ export type Balances = {
     [address in Address]?: string
   }
   
-
 export type Txn = {
     hash: string
-    to: Address
+    beneficiary: Address
     amount: number
     date: string
+    sender: Address
 }
-
 
 export type Histories = {
     [address in Address]?: Txn[]
   }
-
-
 
 export type WalletContextType = Address

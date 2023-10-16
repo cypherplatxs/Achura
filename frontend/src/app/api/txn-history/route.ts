@@ -1,4 +1,4 @@
-import { Address, Histories } from '@/types/index.types'
+import { Address, Histories } from '@/types/server/index.types'
 import { NextResponse, NextRequest } from 'next/server'
 
 //TODO: implement this with a real database or Blockchain
@@ -7,41 +7,47 @@ const histories: Histories = {
   '0x1234': [
     {
       hash: '0x1234',
-      to: '0x1234',
+      beneficiary: '0x1234',
       amount: 1000,
-      date: '2021-09-01'
+      date: '2021-09-01',
+      sender: '0x4321'
     },
     {
       hash: '0x1234',
-      to: '0x1234',
+      beneficiary: '0x1234',
       amount: 1000,
-      date: '2021-09-01'
+      date: '2021-09-01',
+      sender: '0x4321'
     },
     {
       hash: '0x1234',
-      to: '0x1234',
+      beneficiary: '0x1234',
       amount: 1000,
-      date: '2021-09-01'
+      date: '2021-09-01',
+      sender: '0x4321'
     }
   ],
   '0x2345': [
     {
       hash: '0x1234',
-      to: '0x1234',
+      beneficiary: '0x1234',
       amount: 1000,
-      date: '2021-09-01'
+      date: '2021-09-01',
+      sender: '0x4321'
     },
     {
       hash: '0x1234',
-      to: '0x1234',
+      beneficiary: '0x1234',
       amount: 1000,
-      date: '2021-09-01'
+      date: '2021-09-01',
+      sender: '0x4321'
     },
     {
       hash: '0x1234',
-      to: '0x1234',
+      beneficiary: '0x1234',
       amount: 1000,
-      date: '2021-09-01'
+      date: '2021-09-01',
+      sender: '0x4321'
     }
   ]
 }

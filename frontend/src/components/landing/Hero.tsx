@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 
-export default function () {
+const Hero = () => {
 
   return (
     <div >
@@ -61,4 +61,8 @@ export default function () {
       </div>
     </div>
   )
-}
+};
+
+Hero.displayName = 'Hero';
+
+export default Hero;
