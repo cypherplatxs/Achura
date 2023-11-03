@@ -1,5 +1,5 @@
 import { CONTRACT_ID } from '@/config'
-import { Organization, User } from '@/types'
+import { User } from '@/types'
 import {
   Button,
   Input,

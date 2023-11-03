@@ -22,8 +22,7 @@ import {
   useGetOrgs
 } from '@/hooks'
 
-import { useWalletSelector } from '@/context/wallectSelectorContext'
-import { Organization, Txn, User, UserType } from '@/types'
+import { Txn, User, UserType } from '@/types'
 
 enum fetchState {
   loading = 'LOADING',

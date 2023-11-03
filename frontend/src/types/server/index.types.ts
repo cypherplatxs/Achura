@@ -6,8 +6,8 @@ export type Balances = {
   
 
 export type Txn = {
-    hash: string
-    to: Address
+    beneficiary: Address
+    sender: Address
     amount: number
     date: string
 }
